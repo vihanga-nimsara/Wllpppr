@@ -190,7 +190,9 @@
 
   </div>
 
-  <div class="col-side">
+    <div id="community-section"></div>
+
+      <div class="col-side">
     <div class="card">
       <div class="card-head">library stats</div>
       <div class="card-body">
@@ -287,6 +289,39 @@ function submitReport(){alert('Thanks for the report! We\'ll look into it.');clo
       document.getElementById('status-banner').style.display='block';
     }
   }catch(e){}
+})();
+
+(function(){
+  var section=document.getElementById('community-section');
+  var stored=[];
+  try{stored=JSON.parse(localStorage.getItem('community_uploads')||'[]');}catch(e){}
+  if(!stored||!stored.length)return;
+
+  var div=document.createElement('div');
+  div.innerHTML='<div class="listbar" style="margin-top:20px;border:none;"><span style="font-weight:bold;color:#333;">community uploads</span><span class="spacer"></span><a href="community.html" style="font-size:11px;color:#7a7869;">view all →</a></div>';
+  section.appendChild(div);
+
+  var max=Math.min(stored.length,4);
+  for(var i=0;i<max;i++){
+    (function(img,idx){
+      var pid=img.public_id;
+      var caption=pid.split('/').pop().replace(/-/g,' ').replace(/\b\w/g,function(l){return l.toUpperCase();});
+      var row=document.createElement('div');row.className='row';
+      var thumbUrl=window.CLOUDINARY.thumb(pid);
+      row.innerHTML=
+        '<div class="rank">'+(idx+1)+'</div>'+
+        '<div class="vote"><div class="arrow up"></div><div class="count">0</div><div class="arrow down"></div></div>'+
+        '<div class="thumb" style="background-image:url('+thumbUrl+');background-size:cover;background-position:center;"></div>'+
+        '<div class="rowbody"><div class="title"><a href="wallpaper.html?public_id='+encodeURIComponent(pid)+'&title='+encodeURIComponent(caption)+'&w='+(img.width||'?')+'&h='+(img.height||'?')+'">'+caption+'</a><span class="res-tag">'+(img.width||'?')+'×'+(img.height||'?')+'</span></div>'+
+        '<div class="credit">by <b>anonymous</b></div>'+
+        '<div class="stats"><a href="#"><span class="icon">⬇</span>0 downloads</a><a href="#" class="fav-btn"><span class="icon">★</span>0 favorites</a><a href="#" class="share"><span class="icon">↗</span>share</a></div></div>';
+      row.addEventListener('click',function(e){
+        if(e.target.closest('a'))return;
+        window.location='wallpaper.html?public_id='+encodeURIComponent(pid)+'&title='+encodeURIComponent(caption)+'&w='+(img.width||'?')+'&h='+(img.height||'?');
+      });
+      section.appendChild(row);
+    })(stored[i],i);
+  }
 })();
 </script>
 <script src="assets/share.js"></script>
