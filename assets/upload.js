@@ -4,11 +4,13 @@ window.addEventListener('load',function(){
   if(!window.cloudinary){console.warn('Cloudinary widget script not loaded');return;}
 
   function getMeta(){
+    var o=document.querySelector('input[name="orientation"]:checked');
     return{
       title:(document.getElementById('upload-title').value||'').trim(),
       desc:(document.getElementById('upload-desc').value||'').trim(),
       location:(document.getElementById('upload-location').value||'').trim(),
-      tags:(document.getElementById('upload-tags').value||'').split(',').map(function(s){return s.trim();}).filter(Boolean)
+      tags:(document.getElementById('upload-tags').value||'').split(',').map(function(s){return s.trim();}).filter(Boolean),
+      orientation:o?o.value:'desktop'
     };
   }
 
@@ -34,7 +36,7 @@ window.addEventListener('load',function(){
         var info=result.info;
         var meta2=getMeta();
         var stored=JSON.parse(localStorage.getItem('community_uploads')||'[]');
-        stored.unshift({public_id:info.public_id,width:info.width,height:info.height,thumbnail_url:info.thumbnail_url,created_at:info.created_at,title:meta2.title,desc:meta2.desc,location:meta2.location,tags:meta2.tags});
+        stored.unshift({public_id:info.public_id,width:info.width,height:info.height,thumbnail_url:info.thumbnail_url,created_at:info.created_at,title:meta2.title,desc:meta2.desc,location:meta2.location,tags:meta2.tags,orientation:meta2.orientation});
         localStorage.setItem('community_uploads',JSON.stringify(stored));
         document.getElementById('upload-form').style.display='none';
         document.getElementById('upload-status').innerHTML='<div class="upload-done"><div class="upload-thumb" style="background-image:url('+info.thumbnail_url+');"></div><p><b>Uploaded!</b> Your wallpaper is now in the community gallery.</p><a href="community.html" class="follow-btn" style="display:inline-block;width:auto;padding:6px 16px;margin-top:8px;">go to community</a></div>';

@@ -308,15 +308,17 @@ function submitReport(){alert('Thanks for the report! We\'ll look into it.');clo
       var cdesc=img.desc||'';
       var cloc=img.location||'';
       var ctags=(img.tags&&img.tags.length)?img.tags:[];
+      var orient=img.orientation||((img.width&&img.height)?(img.width>img.height?'desktop':'mobile'):'');
       var row=document.createElement('div');row.className='row';
       var thumbUrl=window.CLOUDINARY.thumb(pid);
       var tagHtml=ctags.length?'<span style="font-size:10px;color:var(--meta);">'+ctags.map(function(t){return '<span class="cat-tag" style="margin-right:4px;">#'+t+'</span>';}).join('')+'</span>':'';
       var locHtml=cloc?'<span style="color:var(--meta);font-size:10px;"> · '+cloc+'</span>':'';
+      var orientBadge=orient?'<span class="res-tag" style="background:#eef0e4;color:#5a6b3d;">'+orient+'</span>':'';
       row.innerHTML=
         '<div class="rank">'+(idx+1)+'</div>'+
         '<div class="vote"><div class="arrow up"></div><div class="count">0</div><div class="arrow down"></div></div>'+
         '<div class="thumb" style="background-image:url('+thumbUrl+');background-size:cover;background-position:center;"></div>'+
-        '<div class="rowbody"><div class="title"><a href="wallpaper.html?public_id='+encodeURIComponent(pid)+'&title='+encodeURIComponent(caption)+'&w='+(img.width||'?')+'&h='+(img.height||'?')+'">'+caption+'</a><span class="res-tag">'+(img.width||'?')+'×'+(img.height||'?')+'</span></div>'+
+        '<div class="rowbody"><div class="title"><a href="wallpaper.html?public_id='+encodeURIComponent(pid)+'&title='+encodeURIComponent(caption)+'&w='+(img.width||'?')+'&h='+(img.height||'?')+'">'+caption+'</a><span class="res-tag">'+(img.width||'?')+'×'+(img.height||'?')+'</span>'+orientBadge+'</div>'+
         '<div class="credit">by <b>anonymous</b>'+locHtml+'</div>'+
         (cdesc?'<div style="font-size:11px;color:#7a7869;margin-top:2px;line-height:1.4;">'+cdesc+'</div>':'')+
         '<div class="stats">'+tagHtml+'<a href="#"><span class="icon">⬇</span>0 downloads</a><a href="#" class="fav-btn"><span class="icon">★</span>0 favorites</a><a href="#" class="share"><span class="icon">↗</span>share</a></div></div>';

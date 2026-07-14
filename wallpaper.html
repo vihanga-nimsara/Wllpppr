@@ -40,7 +40,7 @@
       <div class="post-body">
 
         <div class="title-row">
-          <h1><span id="wp-title"></span><span class="res-tag" id="wp-res-tag"></span></h1>
+          <h1><span id="wp-title"></span><span class="res-tag" id="wp-res-tag"></span> <span id="wp-orient"></span></h1>
         </div>
         <div class="byline" id="byline"></div>
 
@@ -215,6 +215,8 @@ function renderCommunity(pid, title, w, h) {
   var cdesc=meta?meta.desc:'';
   var cloc=meta?meta.location:'';
   var ctags=meta&&meta.tags&&meta.tags.length?meta.tags:[];
+  var corient=meta?meta.orientation:((w&&h)?(w>h?'desktop':'mobile'):'');
+  var orientBadge=corient?'<span class="res-tag" style="background:#eef0e4;color:#5a6b3d;vertical-align:2px;">'+corient+'</span> ':'';
   var byline='by <b>anonymous</b> · community upload'+(cloc?' · '+cloc:'');
   var tagHtml='';
   for(var t=0;t<ctags.length;t++){tagHtml+='<span class="cat-tag">#'+ctags[t]+'</span> ';}
@@ -224,6 +226,7 @@ function renderCommunity(pid, title, w, h) {
   document.getElementById('vote-count').textContent = '0';
   document.getElementById('wp-title').textContent = ctitle;
   document.getElementById('wp-res-tag').textContent = (w || '?') + '×' + (h || '?');
+  document.getElementById('wp-orient').innerHTML = orientBadge;
   document.getElementById('byline').innerHTML = byline;
   document.getElementById('preview').style.background = 'url(' + window.CLOUDINARY.preview(pid) + ') center/cover';
 
