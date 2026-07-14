@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>upload wallpaper · wllpppr</title>
+<title>wllpppr reports</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -24,52 +24,24 @@
 </div>
 
 <div class="wrap" style="justify-content:center;">
-  <div class="col-main" style="max-width:560px; flex:none;">
-    <div class="crumbs"><a href="index.html">popular</a> › upload</div>
+  <div class="col-main" style="max-width:640px; flex:none;">
 
-    <div class="post" style="flex-direction:column; padding:24px;">
-      <h1 style="font-size:22px; margin-bottom:4px;">upload a wallpaper</h1>
-      <p style="color:#7a7869; font-size:12px; margin:0 0 18px;">Share your work with the community. High-res, no watermarks, original work only.</p>
+    <div class="crumbs"><a href="index.html">popular</a> › reports</div>
 
-      <div id="upload-form" style="margin-bottom:16px;">
-        <label style="font-size:10px; color:var(--meta); display:block; margin-bottom:2px;">title *</label>
-        <input class="modal-input" id="upload-title" placeholder="e.g. Sunset Over the Mountains" style="margin-bottom:10px;">
+    <div class="post" style="display:block;">
+      <div class="post-body" style="padding:20px;">
 
-        <label style="font-size:10px; color:var(--meta); display:block; margin-bottom:2px;">description</label>
-        <textarea class="modal-input" id="upload-desc" rows="3" placeholder="A short description of your wallpaper..." style="margin-bottom:10px;"></textarea>
-
-        <div style="display:flex; gap:10px; margin-bottom:10px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+          <img src="assets/favicon.png" style="width:28px; height:28px; border-radius:4px;">
           <div style="flex:1;">
-            <label style="font-size:10px; color:var(--meta); display:block; margin-bottom:2px;">location</label>
-            <input class="modal-input" id="upload-location" placeholder="e.g. Tokyo, Japan" style="margin-bottom:0;">
+            <h1 style="font-size:21px; margin:0;">reports</h1>
+            <div style="font-size:11px; color:#7a7869; margin-top:2px;" id="report-count">loading...</div>
           </div>
-          <div style="flex:1;">
-            <label style="font-size:10px; color:var(--meta); display:block; margin-bottom:2px;">tags</label>
-            <input class="modal-input" id="upload-tags" placeholder="comma-separated, e.g. nature, sunset" style="margin-bottom:0;">
-          </div>
+          <button class="btn" onclick="refreshReports()" style="padding:5px 12px;">refresh</button>
         </div>
 
-        <label style="font-size:10px; color:var(--meta); display:block; margin-bottom:4px;">type</label>
-        <div style="display:flex; gap:12px; margin-bottom:4px;">
-          <label style="font-size:11px; display:flex; align-items:center; gap:4px; cursor:pointer;"><input type="radio" name="orientation" value="desktop" checked> Desktop / Landscape</label>
-          <label style="font-size:11px; display:flex; align-items:center; gap:4px; cursor:pointer;"><input type="radio" name="orientation" value="mobile"> Mobile / Portrait</label>
-        </div>
-      </div>
+        <div id="report-list"></div>
 
-      <div style="border:2px dashed #cccabc; border-radius:6px; padding:36px; text-align:center; background:#fbfbf3;" id="upload-status">
-        <div style="font-size:36px; margin-bottom:10px; opacity:.5;">☁</div>
-        <p style="color:#7a7869; font-size:12px; margin:0 0 14px;">Click below to choose a file. JPEG or PNG, min 1920px on the longest side.</p>
-        <button class="follow-btn" id="upload-btn" style="display:inline-block; width:auto; padding:8px 20px; font-size:13px; cursor:pointer;">choose file</button>
-      </div>
-
-      <div style="margin-top:18px; font-size:11px; color:#7a7869; line-height:1.6;">
-        <b style="color:#444;">guidelines</b><br>
-        · Original work only — no AI generations, no reposts<br>
-        · Minimum resolution: 1920×1080 (or equivalent)<br>
-        · No watermarks, text overlays, or signatures in the image area<br>
-        · Appropriate for all ages<br>
-        · By uploading, you license your work under <b>CC BY-NC 4.0</b> and grant wllpppr a non-exclusive right to display, resize, and distribute it through the platform<br>
-        · You retain full copyright and may request takedown at any time<br>
       </div>
     </div>
   </div>
@@ -98,6 +70,7 @@
       <a href="status.html">status</a>
       <a href="reports.html">reports</a>
       <a href="developer.html">developer</a>
+      <a href="reports.html">reports</a>
       <a href="javascript:void(0)" onclick="showReport()">report a broken link</a>
     </div>
   </div>
@@ -114,14 +87,14 @@
       <label>wallpaper URL</label>
       <input class="modal-input" id="report-url" readonly>
       <label>what's broken?</label>
-      <select class="modal-input">
+      <select class="modal-input" id="report-issue">
         <option>Download link doesn't work</option>
         <option>Wrong image / mismatch</option>
         <option>Image won't load in preview</option>
         <option>Other issue</option>
       </select>
       <label>notes (optional)</label>
-      <textarea class="modal-input" rows="3" placeholder="any additional details..."></textarea>
+      <textarea class="modal-input" id="report-notes" rows="3" placeholder="any additional details..."></textarea>
       <button class="btn" onclick="submitReport()">submit report</button>
       <button class="btn" style="float:right;" onclick="closeReport()">cancel</button>
     </div>
@@ -129,14 +102,70 @@
 </div>
 
 <script src="assets/cloudinary.js"></script>
-<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
-<script src="assets/upload.js"></script>
+<script src="assets/supabase.js"></script>
 <script>
 (function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
 function toggleTheme(){var e=document.documentElement;e.getAttribute('data-theme')==='dark'?(e.removeAttribute('data-theme'),localStorage.setItem('theme','light')):(e.setAttribute('data-theme','dark'),localStorage.setItem('theme','dark'));}
 function showReport(){document.getElementById('report-url').value=location.href;document.getElementById('report-modal').classList.add('active');}
 function closeReport(e){if(!e||!e.target.closest('.modal-box'))document.getElementById('report-modal').classList.remove('active');}
-function submitReport(){alert('Thanks for the report! We\'ll look into it.');closeReport();}
+function submitReport(){
+  var url = document.getElementById('report-url').value;
+  var issue = document.getElementById('report-issue').value;
+  var notes = document.getElementById('report-notes').value;
+  var DB = window.SUPABASE;
+  if(!DB){alert('Report system unavailable. Please try again later.');closeReport();return;}
+  DB.submitReport(url, issue, notes, location.pathname).then(function(){
+    alert('Report submitted — we\'ll look into it.');
+    closeReport();
+  }).catch(function(){
+    alert('Failed to submit report. Please try again.');
+    closeReport();
+  });
+}
+
+function refreshReports(){
+  var list = document.getElementById('report-list');
+  var count = document.getElementById('report-count');
+  list.innerHTML = '<div style="text-align:center;padding:40px 0;color:#7a7869;font-size:12px;">loading...</div>';
+  window.SUPABASE.getReports().then(function(rows){
+    if(!rows || !rows.length){
+      list.innerHTML = '<div style="text-align:center;padding:40px 0;color:#7a7869;font-size:12px;">no reports yet</div>';
+      count.textContent = '0 reports';
+      return;
+    }
+    count.textContent = rows.length + ' report' + (rows.length===1?'':'s');
+    list.innerHTML = '';
+    for(var i=0;i<rows.length;i++){
+      var r = rows[i];
+      var d = new Date(r.created_at);
+      var dateStr = d.toLocaleDateString() + ' ' + d.toLocaleTimeString();
+      var page = r.page || '—';
+      var item = document.createElement('div');
+      item.style.cssText = 'padding:14px 0; border-bottom:1px solid #ebe9dc;';
+      item.innerHTML =
+        '<div style="display:flex; justify-content:space-between; align-items:start; gap:10px;">' +
+          '<div style="flex:1; min-width:0;">' +
+            '<div style="font-size:12px; font-weight:bold; color:#c0472a;">' + escapeHtml(r.issue) + '</div>' +
+            '<div style="font-size:11px; color:#555; margin:4px 0; word-break:break-all;"><a href="' + escapeHtml(r.url) + '" style="color:#555;">' + escapeHtml(r.url) + '</a></div>' +
+            (r.notes ? '<div style="font-size:11px; color:#7a7869; font-style:italic;">' + escapeHtml(r.notes) + '</div>' : '') +
+          '</div>' +
+          '<div style="text-align:right; flex-shrink:0;">' +
+            '<div style="font-size:10px; color:#7a7869;">' + dateStr + '</div>' +
+            '<div style="font-size:10px; color:#7a7869; margin-top:2px;">' + escapeHtml(page) + '</div>' +
+          '</div>' +
+        '</div>';
+      list.appendChild(item);
+    }
+  }).catch(function(){
+    list.innerHTML = '<div style="text-align:center;padding:40px 0;color:#c0472a;font-size:12px;">failed to load reports</div>';
+    count.textContent = 'error';
+  });
+}
+
+function escapeHtml(t){if(!t)return '';return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+refreshReports();
 </script>
+<script src="assets/share.js"></script>
 </body>
 </html>

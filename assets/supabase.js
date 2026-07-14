@@ -90,6 +90,14 @@ window.SUPABASE = (function(){
     },
     getCommentCount: function(type, id){
       return count('comments','target_type=eq.'+type+'&target_id=eq.'+id);
+    },
+    submitReport: function(url, issue, notes, page){
+      return api('reports', {method:'POST', body:JSON.stringify({
+        url:url, issue:issue, notes:notes||'', page:page||''
+      })}).then(function(){return true;});
+    },
+    getReports: function(){
+      return api('reports?select=id,url,issue,notes,page,created_at&order=created_at.desc', {method:'GET'});
     }
   };
 })();

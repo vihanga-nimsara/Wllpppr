@@ -242,6 +242,7 @@
       <a href="license.html">license &amp; usage</a>
       <a href="faq.html">faq</a>
       <a href="status.html">status</a>
+      <a href="reports.html">reports</a>
       <a href="developer.html">developer</a>
       <a href="javascript:void(0)" onclick="showReport()">report a broken link</a>
     </div>
@@ -261,14 +262,14 @@
       <label>wallpaper URL</label>
       <input class="modal-input" id="report-url" readonly>
       <label>what's broken?</label>
-      <select class="modal-input">
+      <select class="modal-input" id="report-issue">
         <option>Download link doesn't work</option>
         <option>Wrong image / mismatch</option>
         <option>Image won't load in preview</option>
         <option>Other issue</option>
       </select>
       <label>notes (optional)</label>
-      <textarea class="modal-input" rows="3" placeholder="any additional details..."></textarea>
+      <textarea class="modal-input" id="report-notes" rows="3" placeholder="any additional details..."></textarea>
       <button class="btn" onclick="submitReport()">submit report</button>
       <button class="btn" style="float:right;" onclick="closeReport()">cancel</button>
     </div>
@@ -280,7 +281,20 @@
 function toggleTheme(){var e=document.documentElement;e.getAttribute('data-theme')==='dark'?(e.removeAttribute('data-theme'),localStorage.setItem('theme','light')):(e.setAttribute('data-theme','dark'),localStorage.setItem('theme','dark'));}
 function showReport(){document.getElementById('report-url').value=location.href;document.getElementById('report-modal').classList.add('active');}
 function closeReport(e){if(!e||!e.target.closest('.modal-box'))document.getElementById('report-modal').classList.remove('active');}
-function submitReport(){alert('Thanks for the report! We\'ll look into it.');closeReport();}
+function submitReport(){
+  var url = document.getElementById('report-url').value;
+  var issue = document.getElementById('report-issue').value;
+  var notes = document.getElementById('report-notes').value;
+  var DB = window.SUPABASE;
+  if(!DB){alert('Report system unavailable. Please try again later.');closeReport();return;}
+  DB.submitReport(url, issue, notes, location.pathname).then(function(){
+    alert('Report submitted — we\'ll look into it.');
+    closeReport();
+  }).catch(function(){
+    alert('Failed to submit report. Please try again.');
+    closeReport();
+  });
+}
 (function(){
   try{
     var c=JSON.parse(localStorage.getItem('wllpppr_status'));
