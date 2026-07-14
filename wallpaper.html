@@ -154,6 +154,64 @@ function showReport(){
 function closeReport(e){if(!e||!e.target.closest('.modal-box'))document.getElementById('report-modal').classList.remove('active');}
 function submitReport(){alert('Thanks for the report! We\'ll look into it.');closeReport();}
 
+var DB = window.SUPABASE;
+
+function setStats(dl, fav, com){
+  document.getElementById('stats').innerHTML = '<a href="#"><span class="icon">⬇</span>'+dl+' downloads</a><a href="#" class="fav-btn" id="fav-btn"><span class="icon">★</span>'+fav+' favorites</a><a href="#"><span class="icon">💬</span>'+com+' comments</a><a href="#" class="share"><span class="icon">↗</span>share</a>';
+}
+
+function initVotes(type, id, base){
+  var upEl = document.querySelector('.arrow.up');
+  var downEl = document.querySelector('.arrow.down');
+  var countEl = document.getElementById('vote-count');
+  DB.getVotes(type, id).then(function(v){
+    countEl.textContent = v.net + base;
+    if(v.mine==='up') upEl.style.opacity='1';
+    if(v.mine==='down') downEl.style.opacity='1';
+  });
+  upEl.onclick = function(e){e.preventDefault(); DB.vote(type,id,'up').then(function(v){countEl.textContent = v.net + base; upEl.style.opacity='1'; downEl.style.opacity='0.55';});};
+  downEl.onclick = function(e){e.preventDefault(); DB.vote(type,id,'down').then(function(v){countEl.textContent = v.net + base; downEl.style.opacity='1'; upEl.style.opacity='0.55';});};
+}
+
+function initFav(type, id){
+  DB.isFav(type, id).then(function(f){var btn=document.getElementById('fav-btn'); if(f) btn.classList.add('active');});
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest('#fav-btn');
+    if(!btn) return;
+    e.preventDefault();
+    (btn.classList.contains('active') ? DB.unfav(type, id) : DB.fav(type, id)).then(function(f){btn.classList.toggle('active');});
+  });
+}
+
+function initDownload(type, id){
+  document.addEventListener('click', function(e){
+    if(e.target.closest('.res-btn')) DB.download(type, id);
+  });
+}
+
+function initComments(type, id){
+  function load(){
+    DB.getComments(type, id).then(function(rows){
+      var cm = document.getElementById('comments');
+      cm.innerHTML = '';
+      for(var i=0;i<rows.length;i++){
+        var c=rows[i];
+        var div = document.createElement('div'); div.className = 'comment';
+        div.innerHTML = '<div class="avatar" style="background:linear-gradient(135deg,#b8a0c8,#8a7abf);"></div><div class="comment-body"><div class="comment-meta"><b>'+(c.author||'anonymous')+'</b> · '+new Date(c.created_at).toLocaleDateString()+'</div><div class="comment-text">'+c.body+'</div></div>';
+        cm.appendChild(div);
+      }
+      document.getElementById('comments-head').textContent = rows.length + ' comments';
+    });
+  }
+  document.querySelector('.comment-form .btn').onclick = function(){
+    var ta = document.querySelector('.comment-form textarea');
+    var text = ta.value.trim();
+    if(!text) return;
+    DB.comment(type, id, text).then(function(){ta.value=''; load();});
+  };
+  load();
+}
+
 function renderCurated(slug) {
   var wp = window.WALLPAPERS[slug];
   if (!wp) {
@@ -179,6 +237,7 @@ function renderCurated(slug) {
     (function (label) {
       a.onclick = function (e) {
         e.preventDefault();
+        DB.download('curated', slug);
         var id = 'wallpapers/' + slug;
         var u = label.indexOf('mobile') !== -1 ? window.CLOUDINARY.mobile(id) : label.indexOf('1080') !== -1 || label.indexOf('1080p') !== -1 ? window.CLOUDINARY.url(id, {width: 1920}) : label.indexOf('1440') !== -1 || label.indexOf('1440p') !== -1 ? window.CLOUDINARY.url(id, {width: 2560}) : label.indexOf('4K') !== -1 || label.indexOf('2160') !== -1 ? window.CLOUDINARY.url(id, {width: 3840}) : label.indexOf('5K') !== -1 || label.indexOf('2880') !== -1 ? window.CLOUDINARY.url(id, {width: 5120}) : label.indexOf('UW') !== -1 || label.indexOf('3440') !== -1 ? window.CLOUDINARY.url(id, {width: 3440}) : label.indexOf('2532') !== -1 ? window.CLOUDINARY.url(id, {width: 1170}) : label.indexOf('3200') !== -1 ? window.CLOUDINARY.url(id, {width: 1440}) : label.indexOf('2340') !== -1 ? window.CLOUDINARY.url(id, {width: 1080}) : window.CLOUDINARY.full(id);
         if (u) window.open(u, '_blank');
@@ -186,7 +245,8 @@ function renderCurated(slug) {
     })(opt[0]);
     ro.appendChild(a);
   }
-  document.getElementById('stats').innerHTML = '<a href="#"><span class="icon">⬇</span>' + wp.downloads + ' downloads</a><a href="#" class="fav-btn"><span class="icon">★</span>' + wp.favorites + ' favorites</a><a href="#"><span class="icon">💬</span>' + wp.commentCount + ' comments</a><a href="#" class="share"><span class="icon">↗</span>share</a>';
+  var baseDl = parseInt(wp.downloads)||0, baseFav = parseInt(wp.favorites)||0;
+  setStats(wp.downloads, wp.favorites, wp.commentCount);
   var tl = document.getElementById('taglist');
   tl.innerHTML = '';
   for (var t = 0; t < wp.tags.length; t++) { var ta = document.createElement('a'); ta.href = 'search.html?q=' + wp.tags[t]; ta.textContent = '#' + wp.tags[t]; tl.appendChild(ta); }
@@ -200,6 +260,12 @@ function renderCurated(slug) {
   var rc = document.getElementById('related-card');
   rc.innerHTML = '';
   if (wp.related) { for (var r = 0; r < wp.related.length; r++) { var rel = window.WALLPAPERS[wp.related[r]]; if (!rel) continue; var rd = document.createElement('div'); rd.className = 'rel-row'; rd.innerHTML = '<div class="rel-thumb" style="background:' + rel.gradient + ';"></div><div><div class="rel-title"><a href="wallpaper.html?slug=' + wp.related[r] + '">' + rel.title + '</a></div><div class="rel-meta">' + rel.downloads + ' downloads</div></div>'; rc.appendChild(rd); } }
+
+  initVotes('curated', slug, parseInt(wp.votes)||0);
+  initFav('curated', slug);
+  initDownload('curated', slug);
+  initComments('curated', slug);
+  DB.getFavCount('curated', slug).then(function(c){ setStats(wp.downloads, baseFav + c, wp.commentCount); });
 }
 
 function findCommunity(pid){
@@ -248,6 +314,7 @@ function renderCommunity(pid, title, w, h) {
     (function (label, sw) {
       a.onclick = function (e) {
         e.preventDefault();
+        DB.download('community', pid);
         var url = sw ? window.CLOUDINARY.download(pid, ctitle, sw) : window.CLOUDINARY.download(pid, ctitle, null);
         window.open(url, '_blank');
       };
@@ -255,7 +322,8 @@ function renderCommunity(pid, title, w, h) {
     ro.appendChild(a);
   }
 
-  document.getElementById('stats').innerHTML = '<a href="#"><span class="icon">⬇</span>0 downloads</a><a href="#" class="fav-btn"><span class="icon">★</span>0 favorites</a><a href="#" class="share"><span class="icon">↗</span>share</a>';
+  var dlCount = 0, favCount = 0, comCount = 0;
+  setStats(0, 0, 0);
 
   var descBlock=document.getElementById('desc-block');
   if(cdesc){descBlock.style.display='block';descBlock.innerHTML='<div style="font-size:12px;color:#555;line-height:1.6;padding:10px 0;border-bottom:1px solid #ebe9dc;margin-bottom:14px;">'+cdesc+'</div>';}else{descBlock.style.display='none';}
@@ -267,6 +335,13 @@ function renderCommunity(pid, title, w, h) {
   document.getElementById('info-card').innerHTML = '<div class="stat-line"><span>resolution</span><b>' + (w || '?') + '×' + (h || '?') + '</b></div><div class="stat-line"><span>source</span><b>community</b></div><div class="stat-line"><span>license</span><b>CC BY-NC 4.0</b></div>';
   document.getElementById('more-from-designer').innerHTML = '<span style="color:#7a7869;">community</span>';
   document.getElementById('related-card').innerHTML = '<div style="padding:6px 0;font-size:11px;color:#7a7869;">Uploaded by the wllpppr community.</div>';
+
+  initVotes('community', pid, 0);
+  initFav('community', pid);
+  initDownload('community', pid);
+  initComments('community', pid);
+  DB.getFavCount('community', pid).then(function(c){favCount=c; setStats(dlCount, c, comCount);});
+  DB.getDownloads('community', pid).then(function(c){dlCount=c; setStats(c, favCount, comCount);});
 }
 
 var slug = getSlug();
@@ -277,6 +352,7 @@ if (pid) {
   renderCurated(slug);
 }
 </script>
+<script src="assets/supabase.js"></script>
 <script src="assets/wallpaper-loader.js"></script>
 <script src="assets/share.js"></script>
 </body>
