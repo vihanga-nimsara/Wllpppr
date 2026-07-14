@@ -32,6 +32,7 @@ Built with plain HTML, CSS, and JavaScript. No frameworks, no build step.
 | `faq.html` | Frequently asked questions |
 | `status.html` | Component status (Website, Cloudinary CDN, Uploads) |
 | `license.html` | License & usage (dual: personal non-commercial + CC BY-NC 4.0) |
+| `developer.html` | Developer / about page |
 | `404.html` | Not found page |
 
 ## Setup

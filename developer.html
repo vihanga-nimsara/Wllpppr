@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>developer · wllpppr</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html">← back</a>
+  <span class="spacer"></span>
+  <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">☾</button>
+</div>
+
+<div class="header">
+  <a href="index.html" class="logo">wllpppr</a>
+  <div class="spacer"></div>
+  <form class="searchform" action="search.html" method="get">
+    <input class="searchbox" name="q" placeholder="search wallpapers">
+    <button class="search-go" type="submit">go</button>
+  </form>
+</div>
+
+<div class="wrap" style="justify-content:center;">
+  <div class="col-main" style="max-width:560px; flex:none;">
+
+    <div class="crumbs"><a href="index.html">popular</a> › developer</div>
+
+    <div class="post" style="display:block;">
+      <div class="post-body" style="padding:24px;">
+
+        <div class="profile-head" style="margin-bottom:20px;">
+          <img class="profile-avatar" src="https://instagram.fcmb9-1.fna.fbcdn.net/v/t51.82787-19/698783639_18077220473534836_7756246842400537024_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=instagram.fcmb9-1.fna.fbcdn.net&_nc_cat=104&_nc_oc=Q6cZ2gGoi5RElPGM00px6QQcoXTxqzFTQrkzHH4x8MAFwHDViDgqGR8_i3Ax-r3nMUq7RM4&_nc_ohc=fBR_5N0Jcv0Q7kNvwG0Doiw&_nc_gid=xyOMreLv_ZWrqxHYD8veXg&edm=AP4sbd4BAAAA&ccb=7-5&oh=00_AQCxthIgJp0wc4PqxSEHGAfKmHLoyCdSY4QJQ-UQhTaALA&oe=6A5C3BA1&_nc_sid=7a9f4b" alt="Vihanga" style="width:72px; height:72px; border-radius:50%; object-fit:cover;">
+          <div>
+            <div class="profile-name" style="font-size:18px;">Vihanga</div>
+            <div class="profile-sub" style="font-size:11px; color:var(--meta); margin-top:2px;">developer · designer · wallpapers enthusiast</div>
+          </div>
+          <div class="profile-actions" style="flex-wrap:wrap;">
+            <a href="https://github.com/vihanga-nimsara" class="btn" style="padding:6px 12px; margin-top:0;" target="_blank">github</a>
+          </div>
+        </div>
+
+        <div class="prose">
+          <p>Hey — I'm Vihanga, the person behind wllpppr. I built this site because I spend way too much time staring at my desktop and wanted a wallpaper library that actually respects your attention. No clutter, no sign-ups, no tracking — just good wallpapers.</p>
+
+          <p>Every wallpaper here is hand-picked. Curated collection focuses on quality over quantity — wallpapers that work well across light and dark modes, with clean compositions and thoughtful color palettes.</p>
+
+          <p>This project is completely open source. The code is available on <a href="https://github.com/vihanga-nimsara/Wllpppr">GitHub</a> if you want to see how it works, contribute, or build your own version.</p>
+
+          <h2 style="font-size:13px; margin:20px 0 8px 0; color:#333;">tech stack</h2>
+          <p>Plain HTML, CSS, and JavaScript — no frameworks, no backend, no databases. Images served from Cloudinary. Static hosting on Vercel. No cookies, no analytics, no tracking of any kind.</p>
+
+          <h2 style="font-size:13px; margin:20px 0 8px 0; color:#333;">get in touch</h2>
+          <p>Found a bug, want to report a wallpaper, or just want to say hi? Reach out on <a href="https://github.com/vihanga-nimsara">GitHub</a>.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fwrap">
+    <div class="fcol">
+      <h4>wllpppr</h4>
+      <a href="index.html">popular</a>
+      <a href="category.html">categories</a>
+      <a href="mobile.html">mobile wallpapers</a>
+      <a href="favorites.html">favorites</a>
+      <a href="upload.html">upload</a>
+    </div>
+    <div class="fcol">
+      <h4>community</h4>
+      <a href="designer.html">designers</a>
+      <a href="search.html">search</a>
+      <a href="community.html">community wallpapers</a>
+    </div>
+    <div class="fcol">
+      <h4>about</h4>
+      <a href="license.html">license &amp; usage</a>
+      <a href="faq.html">faq</a>
+      <a href="status.html">status</a>
+      <a href="developer.html">developer</a>
+      <a href="javascript:void(0)" onclick="showReport()">report a broken link</a>
+    </div>
+  </div>
+  <div class="fbottom">wllpppr — a hand-curated wallpaper library.<br>
+      built by <a href="developer.html" style="color:#a9a798; text-decoration:underline;">Vihanga</a> · no cookies were harmed (we don't use any)<br>
+      angry capybara mascot based on <a href="https://www.pinterest.com/pin/806425877067159136/" style="color:#a9a798; text-decoration:underline;">Pinterest</a> — if you're the creator and want it removed, <a href="contact.html" style="color:#a9a798; text-decoration:underline;">let us know</a></div>
+</footer>
+
+<script>
+(function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
+function toggleTheme(){var e=document.documentElement;e.getAttribute('data-theme')==='dark'?(e.removeAttribute('data-theme'),localStorage.setItem('theme','light')):(e.setAttribute('data-theme','dark'),localStorage.setItem('theme','dark'));}
+</script>
+</body>
+</html>
