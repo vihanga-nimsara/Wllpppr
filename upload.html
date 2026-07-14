@@ -31,6 +31,25 @@
       <h1 style="font-size:22px; margin-bottom:4px;">upload a wallpaper</h1>
       <p style="color:#7a7869; font-size:12px; margin:0 0 18px;">Share your work with the community. High-res, no watermarks, original work only.</p>
 
+      <div id="upload-form" style="margin-bottom:16px;">
+        <label style="font-size:10px; color:var(--meta); display:block; margin-bottom:2px;">title *</label>
+        <input class="modal-input" id="upload-title" placeholder="e.g. Sunset Over the Mountains" style="margin-bottom:10px;">
+
+        <label style="font-size:10px; color:var(--meta); display:block; margin-bottom:2px;">description</label>
+        <textarea class="modal-input" id="upload-desc" rows="3" placeholder="A short description of your wallpaper..." style="margin-bottom:10px;"></textarea>
+
+        <div style="display:flex; gap:10px; margin-bottom:10px;">
+          <div style="flex:1;">
+            <label style="font-size:10px; color:var(--meta); display:block; margin-bottom:2px;">location</label>
+            <input class="modal-input" id="upload-location" placeholder="e.g. Tokyo, Japan" style="margin-bottom:0;">
+          </div>
+          <div style="flex:1;">
+            <label style="font-size:10px; color:var(--meta); display:block; margin-bottom:2px;">tags</label>
+            <input class="modal-input" id="upload-tags" placeholder="comma-separated, e.g. nature, sunset" style="margin-bottom:0;">
+          </div>
+        </div>
+      </div>
+
       <div style="border:2px dashed #cccabc; border-radius:6px; padding:36px; text-align:center; background:#fbfbf3;" id="upload-status">
         <div style="font-size:36px; margin-bottom:10px; opacity:.5;">☁</div>
         <p style="color:#7a7869; font-size:12px; margin:0 0 14px;">Click below to choose a file. JPEG or PNG, min 1920px on the longest side.</p>

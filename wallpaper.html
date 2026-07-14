@@ -53,6 +53,8 @@
 
         <div class="stats" id="stats"></div>
 
+        <div id="desc-block" style="display:none;"></div>
+
         <div class="taglist" id="taglist"></div>
 
         <div class="comments-head" id="comments-head"></div>
@@ -200,13 +202,29 @@ function renderCurated(slug) {
   if (wp.related) { for (var r = 0; r < wp.related.length; r++) { var rel = window.WALLPAPERS[wp.related[r]]; if (!rel) continue; var rd = document.createElement('div'); rd.className = 'rel-row'; rd.innerHTML = '<div class="rel-thumb" style="background:' + rel.gradient + ';"></div><div><div class="rel-title"><a href="wallpaper.html?slug=' + wp.related[r] + '">' + rel.title + '</a></div><div class="rel-meta">' + rel.downloads + ' downloads</div></div>'; rc.appendChild(rd); } }
 }
 
+function findCommunity(pid){
+  var stored=[];
+  try{stored=JSON.parse(localStorage.getItem('community_uploads')||'[]');}catch(e){}
+  for(var i=0;i<stored.length;i++){if(stored[i].public_id===pid)return stored[i];}
+  return null;
+}
+
 function renderCommunity(pid, title, w, h) {
-  document.title = title + ' · community · wllpppr';
-  document.getElementById('crumbs').innerHTML = '<a href="index.html">popular</a> › <a href="community.html">community</a> › ' + title;
+  var meta=findCommunity(pid);
+  var ctitle=title||(meta?meta.title:'');
+  var cdesc=meta?meta.desc:'';
+  var cloc=meta?meta.location:'';
+  var ctags=meta&&meta.tags&&meta.tags.length?meta.tags:[];
+  var byline='by <b>anonymous</b> · community upload'+(cloc?' · '+cloc:'');
+  var tagHtml='';
+  for(var t=0;t<ctags.length;t++){tagHtml+='<span class="cat-tag">#'+ctags[t]+'</span> ';}
+
+  document.title = ctitle + ' · community · wllpppr';
+  document.getElementById('crumbs').innerHTML = '<a href="index.html">popular</a> › <a href="community.html">community</a> › ' + ctitle;
   document.getElementById('vote-count').textContent = '0';
-  document.getElementById('wp-title').textContent = title;
+  document.getElementById('wp-title').textContent = ctitle;
   document.getElementById('wp-res-tag').textContent = (w || '?') + '×' + (h || '?');
-  document.getElementById('byline').innerHTML = 'by <b>anonymous</b> · community upload';
+  document.getElementById('byline').innerHTML = byline;
   document.getElementById('preview').style.background = 'url(' + window.CLOUDINARY.preview(pid) + ') center/cover';
 
   var ro = document.getElementById('res-options');
@@ -227,7 +245,7 @@ function renderCommunity(pid, title, w, h) {
     (function (label, sw) {
       a.onclick = function (e) {
         e.preventDefault();
-        var url = sw ? window.CLOUDINARY.download(pid, title, sw) : window.CLOUDINARY.download(pid, title, null);
+        var url = sw ? window.CLOUDINARY.download(pid, ctitle, sw) : window.CLOUDINARY.download(pid, ctitle, null);
         window.open(url, '_blank');
       };
     })(sizes[i].label, sizes[i].w);
@@ -235,10 +253,14 @@ function renderCommunity(pid, title, w, h) {
   }
 
   document.getElementById('stats').innerHTML = '<a href="#"><span class="icon">⬇</span>0 downloads</a><a href="#" class="fav-btn"><span class="icon">★</span>0 favorites</a><a href="#" class="share"><span class="icon">↗</span>share</a>';
-  document.getElementById('taglist').innerHTML = '';
+
+  var descBlock=document.getElementById('desc-block');
+  if(cdesc){descBlock.style.display='block';descBlock.innerHTML='<div style="font-size:12px;color:#555;line-height:1.6;padding:10px 0;border-bottom:1px solid #ebe9dc;margin-bottom:14px;">'+cdesc+'</div>';}else{descBlock.style.display='none';}
+
+  document.getElementById('taglist').innerHTML = tagHtml;
   document.getElementById('comments-head').textContent = '0 comments';
   document.getElementById('comments').innerHTML = '';
-  document.getElementById('designer-card').innerHTML = '<div class="designer-row"><div class="designer-avatar" style="background:linear-gradient(135deg,#888,#555);"></div><div><b style="color:#2a2a2a;">anonymous</b><div class="designer-sub">community uploader</div></div></div>';
+  document.getElementById('designer-card').innerHTML = '<div class="designer-row"><div class="designer-avatar" style="background:linear-gradient(135deg,#888,#555);"></div><div><b style="color:#2a2a2a;">anonymous</b><div class="designer-sub">community uploader'+(cloc?' · '+cloc:'')+'</div></div></div>';
   document.getElementById('info-card').innerHTML = '<div class="stat-line"><span>resolution</span><b>' + (w || '?') + '×' + (h || '?') + '</b></div><div class="stat-line"><span>source</span><b>community</b></div><div class="stat-line"><span>license</span><b>CC BY-NC 4.0</b></div>';
   document.getElementById('more-from-designer').innerHTML = '<span style="color:#7a7869;">community</span>';
   document.getElementById('related-card').innerHTML = '<div style="padding:6px 0;font-size:11px;color:#7a7869;">Uploaded by the wllpppr community.</div>';
