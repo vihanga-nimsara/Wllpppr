@@ -68,12 +68,22 @@
 
         <div class="faq-item">
           <div class="faq-q" style="font-weight:bold; font-size:13px; margin-top:20px; margin-bottom:4px;">How do I save favorites?</div>
-          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">Click the "♡ favorite" button on any wallpaper's detail page. Favorites are stored in your browser (localStorage) and displayed on the <a href="favorites.html">favorites page</a>. They won't sync across devices.</div>
+          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">Click the ★ button on any wallpaper's detail page. Favorites are saved to our database (via Supabase) and displayed on the <a href="favorites.html">favorites page</a>. They follow you across devices as long as you use the same browser.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" style="font-weight:bold; font-size:13px; margin-top:20px; margin-bottom:4px;">How do upvotes and downvotes work?</div>
+          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">Click the ▲ or ▼ arrows on any wallpaper detail page to upvote or downvote. Your vote is saved in the database and updates in real-time. You can change your vote at any time — clicking the same arrow again toggles it off.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" style="font-weight:bold; font-size:13px; margin-top:20px; margin-bottom:4px;">Can I comment on wallpapers?</div>
+          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">Yes! Scroll to the bottom of any wallpaper detail page and use the comment box. Comments are stored in the database and visible to everyone.</div>
         </div>
 
         <div class="faq-item">
           <div class="faq-q" style="font-weight:bold; font-size:13px; margin-top:20px; margin-bottom:4px;">Does this site use cookies?</div>
-          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">No cookies. We use localStorage (which stays in your browser) for theme preference, favorites, and status caching. Nothing is sent to any server — we don't even have a backend to send it to.</div>
+          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">No cookies. We use a localStorage session ID to track your votes, favorites, and comments via Supabase (a hosted PostgreSQL database). No personal data is collected or sold.</div>
         </div>
 
         <div class="faq-item">
@@ -117,7 +127,7 @@
     </div>
   </div>
   <div class="fbottom">wllpppr — a hand-curated wallpaper library with community uploads.<br>
-      built by <a href="developer.html" style="color:#a9a798; text-decoration:underline;">Vihanga</a> · no cookies were harmed (we don't use any)<br>
+      built by <a href="developer.html" style="color:#a9a798; text-decoration:underline;">Vihanga</a> · powered by Supabase · no cookies, no tracking<br>
       angry capybara mascot based on <a href="https://www.pinterest.com/pin/806425877067159136/" style="color:#a9a798; text-decoration:underline;">Pinterest</a> — if you're the creator and want it removed, <a href="contact.html" style="color:#a9a798; text-decoration:underline;">let us know</a></div>
 </footer>
 

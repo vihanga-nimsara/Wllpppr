@@ -74,7 +74,7 @@
     </div>
   </div>
   <div class="fbottom">wllpppr — a hand-curated wallpaper library with community uploads.<br>
-      built by <a href="developer.html" style="color:#a9a798; text-decoration:underline;">Vihanga</a> · no cookies were harmed (we don't use any)<br>
+      built by <a href="developer.html" style="color:#a9a798; text-decoration:underline;">Vihanga</a> · powered by Supabase · no cookies, no tracking<br>
       angry capybara mascot based on <a href="https://www.pinterest.com/pin/806425877067159136/" style="color:#a9a798; text-decoration:underline;">Pinterest</a> — if you're the creator and want it removed, <a href="contact.html" style="color:#a9a798; text-decoration:underline;">let us know</a></div>
 </footer>
 
@@ -146,6 +146,15 @@ function submitReport(){alert('Thanks for the report! We\'ll look into it.');clo
         s.onerror = function(){ clearTimeout(t); cb(false); };
         s.src = 'https://widget.cloudinary.com/v2.0/global/all.js?_=' + Date.now();
         document.head.appendChild(s);
+      }
+    },
+    {
+      name: 'Supabase Database',
+      desc: 'Votes, favorites, comments, and download tracking',
+      check: function(cb){
+        var url = 'https://shbkpqqpmllhognnaixv.supabase.co/rest/v1/upvotes?select=count&limit=0';
+        fetch(url, {headers:{'apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNoYmtwcXFwbWxsaG9nbm5haXh2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2MDc4NDMsImV4cCI6MjA5NTE4Mzg0M30.1FElsEaLOfT25grE8ERnuGwIAoROeQA1cpPkL5WLEvk'}})
+          .then(function(r){ cb(r.ok); }).catch(function(){ cb(false); });
       }
     }
   ];
