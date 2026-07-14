@@ -60,7 +60,7 @@
       <div class="vote"><div class="arrow up"></div><div class="count">3.6k</div><div class="arrow down"></div></div>
       <div class="thumb" style="background:linear-gradient(135deg,#2b2b2b,#555);"></div>
       <div class="rowbody">
-        <div class="title"><a href="wallpaper.html">Minimal desk setup, dark wood, single lamp</a><span class="res-tag">5120×2880</span></div>
+        <div class="title"><a href="wallpaper.html?slug=minimal-desk-setup-dark-wood-single-lamp">Minimal desk setup, dark wood, single lamp</a><span class="res-tag">5120×2880</span></div>
         <div class="credit">by <a href="designer.html?u=studio.quiet">studio.quiet</a></div>
         <div class="stats">
           <a href="category.html?c=minimal" class="cat-tag">minimal</a>
@@ -77,7 +77,7 @@
       <div class="vote"><div class="arrow up"></div><div class="count">1.9k</div><div class="arrow down"></div></div>
       <div class="thumb" style="background:linear-gradient(135deg,#e8e6de,#c9c7ba);"></div>
       <div class="rowbody">
-        <div class="title"><a href="wallpaper.html">Blank concrete wall, single shadow line</a><span class="res-tag">3840×2160</span></div>
+        <div class="title"><a href="wallpaper.html?slug=blank-concrete-wall-single-shadow-line">Blank concrete wall, single shadow line</a><span class="res-tag">3840×2160</span></div>
         <div class="credit">by <a href="designer.html?u=grey.matter">grey.matter</a></div>
         <div class="stats">
           <a href="category.html?c=minimal" class="cat-tag">minimal</a>
@@ -94,7 +94,7 @@
       <div class="vote"><div class="arrow up"></div><div class="count">1.5k</div><div class="arrow down"></div></div>
       <div class="thumb" style="background:linear-gradient(135deg,#f4f1ea,#d8d4c6);"></div>
       <div class="rowbody">
-        <div class="title"><a href="wallpaper.html">Single leaf, off-white background</a><span class="res-tag">2560×1440</span></div>
+        <div class="title"><a href="wallpaper.html?slug=single-leaf-off-white-background">Single leaf, off-white background</a><span class="res-tag">2560×1440</span></div>
         <div class="credit">by <a href="designer.html?u=quiet.things">quiet.things</a></div>
         <div class="stats">
           <a href="category.html?c=minimal" class="cat-tag">minimal</a>
@@ -111,7 +111,7 @@
       <div class="vote"><div class="arrow up"></div><div class="count">1.1k</div><div class="arrow down"></div></div>
       <div class="thumb" style="background:linear-gradient(135deg,#12181c,#2a333a);"></div>
       <div class="rowbody">
-        <div class="title"><a href="wallpaper.html">Matte black, off-center dot</a><span class="res-tag">3440×1440</span></div>
+        <div class="title"><a href="wallpaper.html?slug=matte-black-off-center-dot">Matte black, off-center dot</a><span class="res-tag">3440×1440</span></div>
         <div class="credit">by <a href="designer.html?u=studio.quiet">studio.quiet</a></div>
         <div class="stats">
           <a href="category.html?c=minimal" class="cat-tag">minimal</a>
@@ -157,17 +157,21 @@
       <a href="category.html">categories</a>
       <a href="mobile.html">mobile wallpapers</a>
       <a href="favorites.html">favorites</a>
+      <a href="upload.html">upload</a>
     </div>
     <div class="fcol">
       <h4>community</h4>
       <a href="designer.html">designers</a>
       <a href="search.html">search</a>
+      <a href="community.html">community wallpapers</a>
     </div>
     <div class="fcol">
       <h4>about</h4>
       <a href="license.html">license &amp; usage</a>
+      <a href="faq.html">faq</a>
+      <a href="status.html">status</a>
       <a href="#">contact</a>
-      <a href="404.html">report a broken link</a>
+      <a href="javascript:void(0)" onclick="showReport()">report a broken link</a>
     </div>
   </div>
   <div class="fbottom">wllpppr — a hand-curated wallpaper library.<br>
@@ -175,11 +179,37 @@
       angry capybara mascot based on <a href="https://www.pinterest.com/pin/806425877067159136/" style="color:#a9a798; text-decoration:underline;">Pinterest</a> — if you're the creator and want it removed, <a href="contact.html" style="color:#a9a798; text-decoration:underline;">let us know</a></div>
 </footer>
 
-<script src="assets/api-key.js"></script>
-<script src="assets/unsplash.js"></script>
+<script src="assets/cloudinary.js"></script>
+<script src="assets/wallpaper-loader.js"></script>
+<div class="modal-overlay" id="report-modal" onclick="closeReport(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-head">report a broken link</div>
+    <div class="modal-body">
+      <p>If a download link isn't working, let us know which wallpaper and resolution so we can fix it.</p>
+      <label>wallpaper URL</label>
+      <input class="modal-input" id="report-url" readonly>
+      <label>what's broken?</label>
+      <select class="modal-input">
+        <option>Download link doesn't work</option>
+        <option>Wrong image / mismatch</option>
+        <option>Image won't load in preview</option>
+        <option>Other issue</option>
+      </select>
+      <label>notes (optional)</label>
+      <textarea class="modal-input" rows="3" placeholder="any additional details..."></textarea>
+      <button class="btn" onclick="submitReport()">submit report</button>
+      <button class="btn" style="float:right;" onclick="closeReport()">cancel</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
 function toggleTheme(){var e=document.documentElement;e.getAttribute('data-theme')==='dark'?(e.removeAttribute('data-theme'),localStorage.setItem('theme','light')):(e.setAttribute('data-theme','dark'),localStorage.setItem('theme','dark'));}
+function showReport(){document.getElementById('report-url').value=location.href;document.getElementById('report-modal').classList.add('active');}
+function closeReport(e){if(!e||!e.target.closest('.modal-box'))document.getElementById('report-modal').classList.remove('active');}
+function submitReport(){alert('Thanks for the report! We\'ll look into it.');closeReport();}
 </script>
+<script src="assets/share.js"></script>
 </body>
 </html>

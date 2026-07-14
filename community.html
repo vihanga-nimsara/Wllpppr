@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>mobile wallpapers · wllpppr</title>
+<title>community wallpapers · wllpppr</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="stylesheet" href="assets/style.css">
 </head>
@@ -12,9 +12,9 @@
   <a href="index.html">popular</a>
   <span class="sep">·</span>
   <a href="category.html">all</a>
-  <span class="sep">·</span>
-  <a href="mobile.html" class="active">mobile</a>
   <span class="spacer"></span>
+  <a href="upload.html" class="active">upload</a>
+  <span class="sep">·</span>
   <a href="favorites.html">favorites</a>
   <span class="spacer"></span>
   <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">☾</button>
@@ -23,9 +23,8 @@
 <div class="header">
   <a href="index.html" class="logo">wllpppr</a>
   <div class="tabs">
-    <a href="mobile.html" class="active">phone</a>
-    <a href="#">tablet</a>
-    <a href="#">watch face</a>
+    <a href="community.html" class="active">recent</a>
+    <a href="community.html?sort=top">top</a>
   </div>
   <div class="spacer"></div>
   <form class="searchform" action="search.html" method="get">
@@ -36,80 +35,36 @@
 
 <div class="wrap">
   <div class="col-main">
-    <div class="crumbs"><a href="index.html">popular</a> › mobile</div>
-    <div class="listbar">
-      showing: <select><option>phone (9:19.5+)</option></select>
+    <div class="crumbs"><a href="index.html">popular</a> › <a href="upload.html">upload</a> › community</div>
+    <div class="listbar" style="border:none;">
+      <span style="font-weight:bold; color:#333;">community wallpapers</span>
       <span class="spacer"></span>
-      <span class="count-pill">312 wallpapers</span>
+      <a href="upload.html" class="follow-btn" style="display:inline-block; width:auto; padding:4px 12px; margin-top:0;">+ upload yours</a>
     </div>
 
-    <div class="row">
-      <div class="rank">1</div>
-      <div class="vote"><div class="arrow up"></div><div class="count">2.1k</div><div class="arrow down"></div></div>
-      <div class="thumb tall" style="background:linear-gradient(180deg,#0d1b2a,#1b3a5c);"></div>
-      <div class="rowbody">
-        <div class="title"><a href="wallpaper.html?slug=tokyo-rain-vertical-crop">Tokyo rain, vertical crop</a><span class="res-tag">1170×2532</span></div>
-        <div class="credit">by <a href="designer.html?u=kaeru_night">kaeru_night</a></div>
-        <div class="stats">
-          <a href="category.html?c=cityscapes" class="cat-tag">cityscapes</a>
-          <a href="#"><span class="icon">⬇</span>4.6k downloads</a>
-          <a href="#" class="fav-btn"><span class="icon">★</span>820 favorites</a>
-          <a href="#"><span class="icon">💬</span>38 comments</a>
-          <a href="#" class="share"><span class="icon">↗</span>share</a>
-        </div>
-      </div>
+    <div id="community-list">
+      <div style="padding:40px; text-align:center; color:#7a7869; font-size:12px;">loading community wallpapers...</div>
     </div>
-
-    <div class="row">
-      <div class="rank">2</div>
-      <div class="vote"><div class="arrow up"></div><div class="count">1.8k</div><div class="arrow down"></div></div>
-      <div class="thumb tall" style="background:linear-gradient(180deg,#f4f1ea,#d8d4c6);"></div>
-      <div class="rowbody">
-        <div class="title"><a href="wallpaper.html?slug=single-leaf-vertical-minimal">Single leaf, vertical minimal</a><span class="res-tag">1170×2532</span></div>
-        <div class="credit">by <a href="designer.html?u=quiet.things">quiet.things</a></div>
-        <div class="stats">
-          <a href="category.html?c=minimal" class="cat-tag">minimal</a>
-          <a href="#"><span class="icon">⬇</span>3.9k downloads</a>
-          <a href="#" class="fav-btn"><span class="icon">★</span>710 favorites</a>
-          <a href="#"><span class="icon">💬</span>22 comments</a>
-          <a href="#" class="share"><span class="icon">↗</span>share</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="rank">3</div>
-      <div class="vote"><div class="arrow up"></div><div class="count">1.4k</div><div class="arrow down"></div></div>
-      <div class="thumb tall" style="background:linear-gradient(180deg,#1a1a2e,#e94560);"></div>
-      <div class="rowbody">
-        <div class="title"><a href="wallpaper.html?slug=isometric-city-vertical-pixel-art">Isometric city, vertical pixel art</a><span class="res-tag">1080×2340</span></div>
-        <div class="credit">by <a href="designer.html?u=8bit_hana">8bit_hana</a></div>
-        <div class="stats">
-          <a href="category.html?c=pixel-art" class="cat-tag">pixel art</a>
-          <a href="#"><span class="icon">⬇</span>3.1k downloads</a>
-          <a href="#" class="fav-btn"><span class="icon">★</span>540 favorites</a>
-          <a href="#"><span class="icon">💬</span>44 comments</a>
-          <a href="#" class="share"><span class="icon">↗</span>share</a>
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <div class="col-side">
     <div class="card">
-      <div class="card-head">phone sizes</div>
+      <div class="card-head">community</div>
       <div class="card-body">
-        <div class="taglist">
-          <span>1170×2532</span><span>1179×2556</span>
-          <span>1080×2340</span><span>1440×3200</span>
-        </div>
+        <p>Wallpapers uploaded by the wllpppr community. Not curated — just raw submissions from people who love wallpapers.</p>
+        <p>Got something to share? <a href="upload.html">Upload yours</a>.</p>
       </div>
     </div>
     <div class="card">
-      <div class="card-head">about this section</div>
+      <div class="card-head">license</div>
       <div class="card-body">
-        <p>Wallpapers cropped and checked for tall aspect ratios, so nothing important gets cut off behind your clock or notch.</p>
+        <p>Community wallpapers are shared under <b>CC BY-NC 4.0</b>. You may use them for personal purposes with attribution to the uploader.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">guidelines</div>
+      <div class="card-body">
+        <p>All uploads must be original work, no watermarks, and appropriate for all ages. We review submissions before they appear here.</p>
       </div>
     </div>
   </div>
@@ -123,7 +78,6 @@
       <a href="category.html">categories</a>
       <a href="mobile.html">mobile wallpapers</a>
       <a href="favorites.html">favorites</a>
-      <a href="upload.html">upload</a>
     </div>
     <div class="fcol">
       <h4>community</h4>
@@ -145,8 +99,6 @@
       angry capybara mascot based on <a href="https://www.pinterest.com/pin/806425877067159136/" style="color:#a9a798; text-decoration:underline;">Pinterest</a> — if you're the creator and want it removed, <a href="contact.html" style="color:#a9a798; text-decoration:underline;">let us know</a></div>
 </footer>
 
-<script src="assets/cloudinary.js"></script>
-<script src="assets/wallpaper-loader.js"></script>
 <div class="modal-overlay" id="report-modal" onclick="closeReport(event)">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-head">report a broken link</div>
@@ -169,12 +121,54 @@
   </div>
 </div>
 
+<script src="assets/cloudinary.js"></script>
 <script>
 (function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
 function toggleTheme(){var e=document.documentElement;e.getAttribute('data-theme')==='dark'?(e.removeAttribute('data-theme'),localStorage.setItem('theme','light')):(e.setAttribute('data-theme','dark'),localStorage.setItem('theme','dark'));}
 function showReport(){document.getElementById('report-url').value=location.href;document.getElementById('report-modal').classList.add('active');}
 function closeReport(e){if(!e||!e.target.closest('.modal-box'))document.getElementById('report-modal').classList.remove('active');}
 function submitReport(){alert('Thanks for the report! We\'ll look into it.');closeReport();}
+
+(function(){
+  var list=document.getElementById('community-list');
+
+  function render(items){
+    if(!items||!items.length){
+      list.innerHTML='<div class="empty-state"><div class="big">☁</div><h2>no community wallpapers yet</h2><p>Be the first to share your wallpaper with the community.</p><a href="upload.html" class="follow-btn" style="display:inline-block;width:auto;padding:7px 16px;">upload yours</a></div>';
+      return;
+    }
+    list.innerHTML='';
+    for(var i=0;i<items.length;i++){
+      var img=items[i];
+      var pid=img.public_id;
+      var title=pid.split('/').pop().replace(/-/g,' ').replace(/\b\w/g,function(l){return l.toUpperCase();});
+      (function(publicId,caption,iw,ih){
+        var row=document.createElement('div');row.className='row';
+        row.style.cursor='pointer';
+        var thumbUrl=window.CLOUDINARY.thumb(publicId);
+        row.innerHTML='<div class="rank">'+(i+1)+'</div>'+
+          '<div class="vote"><div class="arrow up"></div><div class="count">0</div><div class="arrow down"></div></div>'+
+          '<div class="thumb" style="background-image:url('+thumbUrl+');background-size:cover;background-position:center;"></div>'+
+          '<div class="rowbody"><div class="title"><a href="wallpaper.html?public_id='+encodeURIComponent(publicId)+'&title='+encodeURIComponent(caption)+'&w='+iw+'&h='+ih+'">'+caption+'</a><span class="res-tag">'+(iw||'?')+'×'+(ih||'?')+'</span></div>'+
+          '<div class="credit">by <b>anonymous</b></div>'+
+          '<div class="stats"><a href="#"><span class="icon">⬇</span>0 downloads</a><a href="#" class="fav-btn"><span class="icon">★</span>0 favorites</a><a href="#" class="share"><span class="icon">↗</span>share</a></div></div>';
+        row.addEventListener('click',function(e){
+          if(e.target.closest('a'))return;
+          window.location='wallpaper.html?public_id='+encodeURIComponent(publicId)+'&title='+encodeURIComponent(caption)+'&w='+iw+'&h='+ih;
+        });
+        list.appendChild(row);
+      })(pid,title,img.width||'?',img.height||'?');
+    }
+  }
+
+  var stored=[];
+  try{stored=JSON.parse(localStorage.getItem('community_uploads')||'[]');}catch(e){}
+  if(stored.length){
+    render(stored);
+  }else{
+    list.innerHTML='<div style="padding:40px;text-align:center;color:#7a7869;font-size:12px;">no community uploads yet — <a href="upload.html">upload one</a>!</div>';
+  }
+})();
 </script>
 <script src="assets/share.js"></script>
 </body>

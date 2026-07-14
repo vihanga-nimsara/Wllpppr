@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>wllpppr faq</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html">← back</a>
+  <span class="spacer"></span>
+  <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">☾</button>
+</div>
+
+<div class="header">
+  <a href="index.html" class="logo">wllpppr</a>
+  <div class="spacer"></div>
+  <form class="searchform" action="search.html" method="get">
+    <input class="searchbox" name="q" placeholder="search wallpapers">
+    <button class="search-go" type="submit">go</button>
+  </form>
+</div>
+
+<div class="wrap" style="justify-content:center;">
+  <div class="col-main" style="max-width:600px; flex:none;">
+
+    <div class="crumbs"><a href="index.html">popular</a> › faq</div>
+
+    <div class="post" style="display:block;">
+      <div class="post-body" style="padding:24px;">
+
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <img src="assets/favicon.png" style="width:28px; height:28px; border-radius:4px;">
+          <h1 style="font-size:21px; margin:0;">frequently asked questions</h1>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" style="font-weight:bold; font-size:13px; margin-top:20px; margin-bottom:4px;">How do I download a wallpaper?</div>
+          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">Click the wallpaper title or thumbnail to open its detail page. From there, click one of the resolution buttons (e.g. 1920×1080, 2560×1440, 3840×2160) to download. The file will be delivered from our CDN with the correct filename.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" style="font-weight:bold; font-size:13px; margin-top:20px; margin-bottom:4px;">Can I upload my own wallpapers?</div>
+          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">Yes! Visit the <a href="upload.html">upload page</a> to submit your wallpapers. Uploads are stored on Cloudinary and listed in the <a href="community.html">community gallery</a>. By uploading, you agree to license your work under <a href="license.html">CC BY-NC 4.0</a>.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" style="font-weight:bold; font-size:13px; margin-top:20px; margin-bottom:4px;">What resolutions are available?</div>
+          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">Curated wallpapers offer up to four resolutions: the original upload, 2560×1440 (QHD), 1920×1080 (Full HD), and 1280×720 (HD). Community uploads are available at their original resolution and a 1920×1080 downscale.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" style="font-weight:bold; font-size:13px; margin-top:20px; margin-bottom:4px;">Can I use these wallpapers for commercial projects?</div>
+          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">Curated wallpapers are licensed for <b>personal, non-commercial use only</b>. Community uploads are <b>CC BY-NC 4.0</b> — non-commercial with attribution required. See the <a href="license.html">license page</a> for full details.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" style="font-weight:bold; font-size:13px; margin-top:20px; margin-bottom:4px;">How do I attribute a wallpaper?</div>
+          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">If you use a community wallpaper, credit the artist by name and link back to wllpppr. For curated wallpapers, no attribution is needed for personal use — just don't redistribute them commercially.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" style="font-weight:bold; font-size:13px; margin-top:20px; margin-bottom:4px;">I found my artwork here and want it removed.</div>
+          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">We respect creators' rights. If your work appears on wllpppr without permission, <a href="contact.html">contact us</a> with a link to the wallpaper and we'll remove it promptly. See our <a href="license.html">takedown policy</a>.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" style="font-weight:bold; font-size:13px; margin-top:20px; margin-bottom:4px;">How do I save favorites?</div>
+          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">Click the "♡ favorite" button on any wallpaper's detail page. Favorites are stored in your browser (localStorage) and displayed on the <a href="favorites.html">favorites page</a>. They won't sync across devices.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" style="font-weight:bold; font-size:13px; margin-top:20px; margin-bottom:4px;">Does this site use cookies?</div>
+          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">No cookies. We use localStorage (which stays in your browser) for theme preference, favorites, and status caching. Nothing is sent to any server — we don't even have a backend to send it to.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" style="font-weight:bold; font-size:13px; margin-top:20px; margin-bottom:4px;">I see a broken link or incorrect info.</div>
+          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">Use the "report a broken link" link in the footer to let us know, or <a href="contact.html">contact us</a> directly.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" style="font-weight:bold; font-size:13px; margin-top:20px; margin-bottom:4px;">Is there a mobile app?</div>
+          <div class="faq-a" style="font-size:11px; color:#555; line-height:1.6;">No app — but the site is responsive and works well on mobile. You can browse the <a href="mobile.html">mobile wallpapers</a> collection and download directly to your phone.</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fwrap">
+    <div class="fcol">
+      <h4>wllpppr</h4>
+      <a href="index.html">popular</a>
+      <a href="category.html">categories</a>
+      <a href="mobile.html">mobile wallpapers</a>
+      <a href="favorites.html">favorites</a>
+      <a href="upload.html">upload</a>
+    </div>
+    <div class="fcol">
+      <h4>community</h4>
+      <a href="designer.html">designers</a>
+      <a href="search.html">search</a>
+      <a href="community.html">community wallpapers</a>
+    </div>
+    <div class="fcol">
+      <h4>about</h4>
+      <a href="license.html">license &amp; usage</a>
+      <a href="faq.html">faq</a>
+      <a href="status.html">status</a>
+      <a href="#">contact</a>
+      <a href="javascript:void(0)" onclick="showReport()">report a broken link</a>
+    </div>
+  </div>
+  <div class="fbottom">wllpppr — a hand-curated wallpaper library.<br>
+      built by <a href="#" style="color:#a9a798; text-decoration:underline;">Vihanga</a> · fueled by coffee, old Reddit nostalgia and one too many browser tabs · no cookies were harmed (we don't use any)<br>
+      angry capybara mascot based on <a href="https://www.pinterest.com/pin/806425877067159136/" style="color:#a9a798; text-decoration:underline;">Pinterest</a> — if you're the creator and want it removed, <a href="contact.html" style="color:#a9a798; text-decoration:underline;">let us know</a></div>
+</footer>
+
+<script>
+(function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
+function toggleTheme(){var e=document.documentElement;e.getAttribute('data-theme')==='dark'?(e.removeAttribute('data-theme'),localStorage.setItem('theme','light')):(e.setAttribute('data-theme','dark'),localStorage.setItem('theme','dark'));}
+</script>
+</body>
+</html>

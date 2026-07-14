@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Tokyo rain, neon reflections, blue hour · wllpppr</title>
+<title id="page-title">wallpaper · wllpppr</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
 <div class="topbar">
-  <a href="index.html">← back to popular</a>
+  <a href="javascript:history.back()">← back</a>
   <span class="spacer"></span>
   <a href="favorites.html">favorites</a>
   <span class="sep">·</span>
-  <a href="404.html">report</a>
+  <a href="javascript:void(0)" onclick="showReport()">report</a>
   <span class="spacer"></span>
   <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">☾</button>
 </div>
@@ -27,76 +27,40 @@
   </form>
 </div>
 
-<div class="wrap">
+<div class="wrap" id="main-wrap">
   <div class="col-main">
-    <div class="crumbs"><a href="index.html">popular</a> › <a href="category.html?c=cityscapes">cityscapes</a> › Tokyo rain, neon reflections, blue hour</div>
+    <div class="crumbs" id="crumbs"></div>
 
     <div class="post">
       <div class="vote">
         <div class="arrow up"></div>
-        <div class="count">4.1k</div>
+        <div class="count" id="vote-count"></div>
         <div class="arrow down"></div>
       </div>
       <div class="post-body">
 
         <div class="title-row">
-          <h1>Tokyo rain, neon reflections, blue hour<span class="res-tag">3840×2160</span></h1>
+          <h1><span id="wp-title"></span><span class="res-tag" id="wp-res-tag"></span></h1>
         </div>
-        <div class="byline">
-          by <a href="designer.html?u=kaeru_night">kaeru_night</a> · <a href="category.html?c=cityscapes" class="cat-tag">cityscapes</a> · submitted 2 days ago
-        </div>
+        <div class="byline" id="byline"></div>
 
-        <div class="preview"></div>
+        <div class="preview" id="preview"></div>
 
-        <div class="download-block">
+        <div class="download-block" id="download-block">
           <div class="label">choose a resolution</div>
-          <div class="res-options">
-            <a href="#" class="res-btn primary">3840×2160 (4K)<span class="filesize">4.8 MB</span></a>
-            <a href="#" class="res-btn">2560×1440<span class="filesize">2.6 MB</span></a>
-            <a href="#" class="res-btn">1920×1080<span class="filesize">1.4 MB</span></a>
-            <a href="#" class="res-btn">1170×2532 (mobile)<span class="filesize">980 KB</span></a>
-          </div>
+          <div class="res-options" id="res-options"></div>
         </div>
 
-        <div class="stats">
-          <a href="#"><span class="icon">⬇</span>12.4k downloads</a>
-          <a href="#" class="fav-btn"><span class="icon">★</span>2.1k favorites</a>
-          <a href="#"><span class="icon">💬</span>142 comments</a>
-          <a href="#" class="share"><span class="icon">↗</span>share</a>
-        </div>
+        <div class="stats" id="stats"></div>
 
-        <div class="taglist">
-          <a href="search.html?q=tokyo">#tokyo</a><a href="search.html?q=rain">#rain</a><a href="search.html?q=neon">#neon</a>
-          <a href="search.html?q=night">#night</a><a href="search.html?q=city">#city</a><a href="search.html?q=4k">#4k</a>
-        </div>
+        <div class="taglist" id="taglist"></div>
 
-        <div class="comments-head">142 comments</div>
+        <div class="comments-head" id="comments-head"></div>
         <div class="comment-form">
           <textarea placeholder="what do you think of this one?"></textarea>
           <button class="btn">comment</button>
         </div>
-
-        <div class="comment">
-          <div class="avatar" style="background:linear-gradient(135deg,#3a6ea5,#5a4a9a);"></div>
-          <div class="comment-body">
-            <div class="comment-meta"><b>mochidesu</b> · 1 day ago <span class="cvote">▲ 84</span></div>
-            <div class="comment-text">The reflections in the crosswalk are doing all the work here. Set this as my lock screen immediately.</div>
-          </div>
-        </div>
-        <div class="comment">
-          <div class="avatar" style="background:linear-gradient(135deg,#ff8a52,#c0472a);"></div>
-          <div class="comment-body">
-            <div class="comment-meta"><b>arinasfilm</b> · 1 day ago <span class="cvote">▲ 51</span></div>
-            <div class="comment-text">What lens for this? The chromatic falloff toward the edges is really clean for a night shot.</div>
-          </div>
-        </div>
-        <div class="comment">
-          <div class="avatar" style="background:linear-gradient(135deg,#1c7a5e,#0f3d2e);"></div>
-          <div class="comment-body">
-            <div class="comment-meta"><b>kaeru_night</b> · 20 hours ago <span class="cvote">▲ 39</span></div>
-            <div class="comment-text">Sony 35mm f/1.4, handheld, three exposures blended for the puddle detail. Glad it reads well at 4K.</div>
-          </div>
-        </div>
+        <div id="comments"></div>
 
       </div>
     </div>
@@ -105,54 +69,17 @@
   <div class="col-side">
     <div class="card">
       <div class="card-head">designer</div>
-      <div class="card-body">
-        <div class="designer-row">
-          <div class="designer-avatar"></div>
-          <div>
-            <a href="designer.html?u=kaeru_night" class="designer-name" style="color:#2a2a2a;">kaeru_night</a>
-            <div class="designer-sub">38 wallpapers · joined 2024</div>
-          </div>
-        </div>
-        <a href="#" class="follow-btn">follow</a>
-      </div>
+      <div class="card-body" id="designer-card"></div>
     </div>
 
     <div class="card">
       <div class="card-head">wallpaper info</div>
-      <div class="card-body">
-        <div class="stat-line"><span>resolution</span><b>3840×2160</b></div>
-        <div class="stat-line"><span>aspect ratio</span><b>16:9</b></div>
-        <div class="stat-line"><span>format</span><b>JPG</b></div>
-        <div class="stat-line"><span>uploaded</span><b>2 days ago</b></div>
-        <div class="stat-line"><span>license</span><b>free to use</b></div>
-      </div>
+      <div class="card-body" id="info-card"></div>
     </div>
 
     <div class="card">
-      <div class="card-head">more from <a href="designer.html?u=kaeru_night" style="color:#333;">kaeru_night</a></div>
-      <div class="card-body">
-        <div class="rel-row">
-          <div class="rel-thumb" style="background:linear-gradient(135deg,#1a1a2e,#e94560);"></div>
-          <div>
-            <div class="rel-title"><a href="#">Shibuya crossing, long exposure</a></div>
-            <div class="rel-meta">1.9k downloads</div>
-          </div>
-        </div>
-        <div class="rel-row">
-          <div class="rel-thumb" style="background:linear-gradient(135deg,#2b2b2b,#555);"></div>
-          <div>
-            <div class="rel-title"><a href="#">Vending machine glow, alleyway</a></div>
-            <div class="rel-meta">3.4k downloads</div>
-          </div>
-        </div>
-        <div class="rel-row">
-          <div class="rel-thumb" style="background:linear-gradient(135deg,#0f3d2e,#1c7a5e);"></div>
-          <div>
-            <div class="rel-title"><a href="#">Train platform, empty at midnight</a></div>
-            <div class="rel-meta">2.7k downloads</div>
-          </div>
-        </div>
-      </div>
+      <div class="card-head">more from <span id="more-from-designer"></span></div>
+      <div class="card-body" id="related-card"></div>
     </div>
   </div>
 </div>
@@ -165,17 +92,21 @@
       <a href="category.html">categories</a>
       <a href="mobile.html">mobile wallpapers</a>
       <a href="favorites.html">favorites</a>
+      <a href="upload.html">upload</a>
     </div>
     <div class="fcol">
       <h4>community</h4>
       <a href="designer.html">designers</a>
       <a href="search.html">search</a>
+      <a href="community.html">community wallpapers</a>
     </div>
     <div class="fcol">
       <h4>about</h4>
       <a href="license.html">license &amp; usage</a>
+      <a href="faq.html">faq</a>
+      <a href="status.html">status</a>
       <a href="#">contact</a>
-      <a href="404.html">report a broken link</a>
+      <a href="javascript:void(0)" onclick="showReport()">report a broken link</a>
     </div>
   </div>
   <div class="fbottom">wllpppr — a hand-curated wallpaper library.<br>
@@ -183,11 +114,145 @@
       angry capybara mascot based on <a href="https://www.pinterest.com/pin/806425877067159136/" style="color:#a9a798; text-decoration:underline;">Pinterest</a> — if you're the creator and want it removed, <a href="contact.html" style="color:#a9a798; text-decoration:underline;">let us know</a></div>
 </footer>
 
-<script src="assets/api-key.js"></script>
-<script src="assets/unsplash.js"></script>
+<div class="modal-overlay" id="report-modal" onclick="closeReport(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-head">report a broken link</div>
+    <div class="modal-body">
+      <p>If a download link isn't working, let us know which wallpaper and resolution so we can fix it.</p>
+      <label>wallpaper URL</label>
+      <input class="modal-input" id="report-url" readonly>
+      <label>what's broken?</label>
+      <select class="modal-input">
+        <option>Download link doesn't work</option>
+        <option>Wrong image / mismatch</option>
+        <option>Image won't load in preview</option>
+        <option>Other issue</option>
+      </select>
+      <label>notes (optional)</label>
+      <textarea class="modal-input" rows="3" placeholder="any additional details..."></textarea>
+      <button class="btn" onclick="submitReport()">submit report</button>
+      <button class="btn" style="float:right;" onclick="closeReport()">cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/cloudinary.js"></script>
+<script src="assets/data.js"></script>
 <script>
 (function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
 function toggleTheme(){var e=document.documentElement;e.getAttribute('data-theme')==='dark'?(e.removeAttribute('data-theme'),localStorage.setItem('theme','light')):(e.setAttribute('data-theme','dark'),localStorage.setItem('theme','dark'));}
+
+function getSlug(){var m=location.search.match(/slug=([^&]*)/);return m?decodeURIComponent(m[1]):null;}
+function getParam(n){var m=location.search.match(new RegExp(n+'=([^&]*)'));return m?decodeURIComponent(m[1]):null;}
+
+function showReport(){
+  document.getElementById('report-url').value=location.href;
+  document.getElementById('report-modal').classList.add('active');
+}
+function closeReport(e){if(!e||!e.target.closest('.modal-box'))document.getElementById('report-modal').classList.remove('active');}
+function submitReport(){alert('Thanks for the report! We\'ll look into it.');closeReport();}
+
+function renderCurated(slug) {
+  var wp = window.WALLPAPERS[slug];
+  if (!wp) {
+    document.getElementById('main-wrap').innerHTML = '<div class="col-main" style="max-width:520px; flex:none;"><div class="notfound"><div class="code">404</div><h2>this wallpaper wandered off</h2><p>The wallpaper you\'re looking for doesn\'t exist, or the link is broken.</p><a href="index.html" class="follow-btn" style="display:inline-block;width:auto;padding:8px 18px;">back to popular</a></div></div>';
+    return;
+  }
+  var d = window.DESIGNERS[wp.designer] || {display: wp.designer, avatar: 'linear-gradient(135deg,#888,#555)', wallpapers: '?', followers: '?', joined: '?', location: '', about: '', totalDownloads: '?', totalFavorites: '?', topCategories: []};
+  document.title = wp.title + ' · wllpppr';
+  document.getElementById('crumbs').innerHTML = '<a href="index.html">popular</a> › <a href="category.html?c=' + wp.category + '">' + wp.categoryDisplay + '</a> › ' + wp.title;
+  document.getElementById('vote-count').textContent = wp.votes;
+  document.getElementById('wp-title').textContent = wp.title;
+  document.getElementById('wp-res-tag').textContent = wp.resolution;
+  document.getElementById('byline').innerHTML = 'by <a href="designer.html?u=' + wp.designer + '">' + wp.designer + '</a> · <a href="category.html?c=' + wp.category + '" class="cat-tag">' + wp.categoryDisplay + '</a> · submitted ' + wp.uploaded;
+  document.getElementById('preview').style.background = 'url(' + window.CLOUDINARY.preview('wallpapers/' + slug) + ') center/cover';
+  var ro = document.getElementById('res-options');
+  ro.innerHTML = '';
+  for (var i = 0; i < wp.resOptions.length; i++) {
+    var opt = wp.resOptions[i];
+    var a = document.createElement('a');
+    a.href = '#';
+    a.className = 'res-btn' + (opt[2] ? ' primary' : '');
+    a.innerHTML = opt[0] + '<span class="filesize">' + opt[1] + '</span>';
+    (function (label) {
+      a.onclick = function (e) {
+        e.preventDefault();
+        var id = 'wallpapers/' + slug;
+        var u = label.indexOf('mobile') !== -1 ? window.CLOUDINARY.mobile(id) : label.indexOf('1080') !== -1 || label.indexOf('1080p') !== -1 ? window.CLOUDINARY.url(id, {width: 1920}) : label.indexOf('1440') !== -1 || label.indexOf('1440p') !== -1 ? window.CLOUDINARY.url(id, {width: 2560}) : label.indexOf('4K') !== -1 || label.indexOf('2160') !== -1 ? window.CLOUDINARY.url(id, {width: 3840}) : label.indexOf('5K') !== -1 || label.indexOf('2880') !== -1 ? window.CLOUDINARY.url(id, {width: 5120}) : label.indexOf('UW') !== -1 || label.indexOf('3440') !== -1 ? window.CLOUDINARY.url(id, {width: 3440}) : label.indexOf('2532') !== -1 ? window.CLOUDINARY.url(id, {width: 1170}) : label.indexOf('3200') !== -1 ? window.CLOUDINARY.url(id, {width: 1440}) : label.indexOf('2340') !== -1 ? window.CLOUDINARY.url(id, {width: 1080}) : window.CLOUDINARY.full(id);
+        if (u) window.open(u, '_blank');
+      };
+    })(opt[0]);
+    ro.appendChild(a);
+  }
+  document.getElementById('stats').innerHTML = '<a href="#"><span class="icon">⬇</span>' + wp.downloads + ' downloads</a><a href="#" class="fav-btn"><span class="icon">★</span>' + wp.favorites + ' favorites</a><a href="#"><span class="icon">💬</span>' + wp.commentCount + ' comments</a><a href="#" class="share"><span class="icon">↗</span>share</a>';
+  var tl = document.getElementById('taglist');
+  tl.innerHTML = '';
+  for (var t = 0; t < wp.tags.length; t++) { var ta = document.createElement('a'); ta.href = 'search.html?q=' + wp.tags[t]; ta.textContent = '#' + wp.tags[t]; tl.appendChild(ta); }
+  document.getElementById('comments-head').textContent = wp.commentCount + ' comments';
+  var cm = document.getElementById('comments');
+  cm.innerHTML = '';
+  for (var c = 0; c < wp.comments.length; c++) { var com = wp.comments[c]; var div = document.createElement('div'); div.className = 'comment'; div.innerHTML = '<div class="avatar" style="background:' + com.avatar + ';"></div><div class="comment-body"><div class="comment-meta"><b>' + com.user + '</b> · ' + com.time + ' <span class="cvote">' + com.votes + '</span></div><div class="comment-text">' + com.text + '</div></div>'; cm.appendChild(div); }
+  document.getElementById('designer-card').innerHTML = '<div class="designer-row"><div class="designer-avatar" style="background:' + d.avatar + ';"></div><div><a href="designer.html?u=' + wp.designer + '" class="designer-name" style="color:#2a2a2a;">' + d.display + '</a><div class="designer-sub">' + d.wallpapers + ' wallpapers · joined ' + d.joined + '</div></div></div><a href="designer.html?u=' + wp.designer + '" class="follow-btn">follow</a>';
+  document.getElementById('info-card').innerHTML = '<div class="stat-line"><span>resolution</span><b>' + wp.resolution + '</b></div><div class="stat-line"><span>aspect ratio</span><b>' + wp.aspectRatio + '</b></div><div class="stat-line"><span>format</span><b>' + wp.format + '</b></div><div class="stat-line"><span>uploaded</span><b>' + wp.uploaded + '</b></div><div class="stat-line"><span>license</span><b>' + wp.license + '</b></div>';
+  document.getElementById('more-from-designer').innerHTML = '<a href="designer.html?u=' + wp.designer + '" style="color:#333;">' + d.display + '</a>';
+  var rc = document.getElementById('related-card');
+  rc.innerHTML = '';
+  if (wp.related) { for (var r = 0; r < wp.related.length; r++) { var rel = window.WALLPAPERS[wp.related[r]]; if (!rel) continue; var rd = document.createElement('div'); rd.className = 'rel-row'; rd.innerHTML = '<div class="rel-thumb" style="background:' + rel.gradient + ';"></div><div><div class="rel-title"><a href="wallpaper.html?slug=' + wp.related[r] + '">' + rel.title + '</a></div><div class="rel-meta">' + rel.downloads + ' downloads</div></div>'; rc.appendChild(rd); } }
+}
+
+function renderCommunity(pid, title, w, h) {
+  document.title = title + ' · community · wllpppr';
+  document.getElementById('crumbs').innerHTML = '<a href="index.html">popular</a> › <a href="community.html">community</a> › ' + title;
+  document.getElementById('vote-count').textContent = '0';
+  document.getElementById('wp-title').textContent = title;
+  document.getElementById('wp-res-tag').textContent = (w || '?') + '×' + (h || '?');
+  document.getElementById('byline').innerHTML = 'by <b>anonymous</b> · community upload';
+  document.getElementById('preview').style.background = 'url(' + window.CLOUDINARY.preview(pid) + ') center/cover';
+
+  var ro = document.getElementById('res-options');
+  ro.innerHTML = '';
+  var sizes = [
+    {label: 'original', w: w > 3840 ? w : null},
+    {label: '4K', w: 3840},
+    {label: '1440p', w: 2560},
+    {label: '1080p', w: 1920}
+  ];
+  if (w > h) sizes.push({label: 'mobile', w: 1080});
+  for (var i = 0; i < sizes.length; i++) {
+    if (sizes[i].w && sizes[i].w > w) continue;
+    var a = document.createElement('a');
+    a.href = '#';
+    a.className = 'res-btn' + (i === 0 ? ' primary' : '');
+    a.textContent = sizes[i].label;
+    (function (label, sw) {
+      a.onclick = function (e) {
+        e.preventDefault();
+        var url = sw ? window.CLOUDINARY.download(pid, title, sw) : window.CLOUDINARY.download(pid, title, null);
+        window.open(url, '_blank');
+      };
+    })(sizes[i].label, sizes[i].w);
+    ro.appendChild(a);
+  }
+
+  document.getElementById('stats').innerHTML = '<a href="#"><span class="icon">⬇</span>0 downloads</a><a href="#" class="fav-btn"><span class="icon">★</span>0 favorites</a><a href="#" class="share"><span class="icon">↗</span>share</a>';
+  document.getElementById('taglist').innerHTML = '';
+  document.getElementById('comments-head').textContent = '0 comments';
+  document.getElementById('comments').innerHTML = '';
+  document.getElementById('designer-card').innerHTML = '<div class="designer-row"><div class="designer-avatar" style="background:linear-gradient(135deg,#888,#555);"></div><div><b style="color:#2a2a2a;">anonymous</b><div class="designer-sub">community uploader</div></div></div>';
+  document.getElementById('info-card').innerHTML = '<div class="stat-line"><span>resolution</span><b>' + (w || '?') + '×' + (h || '?') + '</b></div><div class="stat-line"><span>source</span><b>community</b></div><div class="stat-line"><span>license</span><b>CC BY-NC 4.0</b></div>';
+  document.getElementById('more-from-designer').innerHTML = '<span style="color:#7a7869;">community</span>';
+  document.getElementById('related-card').innerHTML = '<div style="padding:6px 0;font-size:11px;color:#7a7869;">Uploaded by the wllpppr community.</div>';
+}
+
+var slug = getSlug();
+var pid = getParam('public_id');
+if (pid) {
+  renderCommunity(pid, getParam('title') || 'community wallpaper', parseInt(getParam('w')), parseInt(getParam('h')));
+} else {
+  renderCurated(slug);
+}
 </script>
+<script src="assets/wallpaper-loader.js"></script>
+<script src="assets/share.js"></script>
 </body>
 </html>

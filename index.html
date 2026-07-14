@@ -48,6 +48,10 @@
   </form>
 </div>
 
+<div id="status-banner" style="display:none; margin-bottom:10px; padding:8px 12px; border-radius:4px; font-size:11px; font-weight:bold; background:#f8d7da; color:#c0472a; border:1px solid #f5c6cb;">
+  <svg width="12" height="12" viewBox="0 0 16 16" style="margin-right:6px; vertical-align:-1px;"><circle cx="8" cy="8" r="7" fill="#c0472a"/></svg>
+  Some services are experiencing issues — <a href="status.html" style="color:#c0472a; text-decoration:underline;">check status</a>
+</div>
 <div class="wrap">
   <div class="col-main">
     <div class="listbar">links from: <select><option>past month</option></select></div>
@@ -62,7 +66,7 @@
       </div>
       <div class="thumb" style="background:linear-gradient(135deg,#0d1b2a,#1b3a5c);"></div>
       <div class="rowbody">
-        <div class="title"><a href="wallpaper.html">Tokyo rain, neon reflections, blue hour</a><span class="res-tag">3840×2160</span></div>
+        <div class="title"><a href="wallpaper.html?slug=tokyo-rain-neon-reflections-blue-hour">Tokyo rain, neon reflections, blue hour</a><span class="res-tag">3840×2160</span></div>
         <div class="credit">by <a href="designer.html?u=kaeru_night">kaeru_night</a></div>
         <div class="stats">
           <span class="cat-tag">cityscapes</span>
@@ -84,7 +88,7 @@
       </div>
       <div class="thumb" style="background:linear-gradient(135deg,#2b2b2b,#555);"></div>
       <div class="rowbody">
-        <div class="title"><a href="wallpaper.html">Minimal desk setup, dark wood, single lamp</a><span class="res-tag">5120×2880</span></div>
+        <div class="title"><a href="wallpaper.html?slug=minimal-desk-setup-dark-wood-single-lamp">Minimal desk setup, dark wood, single lamp</a><span class="res-tag">5120×2880</span></div>
         <div class="credit">by <a href="designer.html?u=studio.quiet">studio.quiet</a></div>
         <div class="stats">
           <span class="cat-tag">minimal</span>
@@ -106,7 +110,7 @@
       </div>
       <div class="thumb" style="background:linear-gradient(135deg,#6a4a8a,#c96ba0);"></div>
       <div class="rowbody">
-        <div class="title"><a href="wallpaper.html">Synthwave grid horizon, hand-drawn sun</a><span class="res-tag">2560×1440</span></div>
+        <div class="title"><a href="wallpaper.html?slug=synthwave-grid-horizon-hand-drawn-sun">Synthwave grid horizon, hand-drawn sun</a><span class="res-tag">2560×1440</span></div>
         <div class="credit">by <a href="designer.html?u=vhs_ghost">vhs_ghost</a></div>
         <div class="stats">
           <span class="cat-tag">synthwave</span>
@@ -128,7 +132,7 @@
       </div>
       <div class="thumb" style="background:linear-gradient(135deg,#0f3d2e,#1c7a5e);"></div>
       <div class="rowbody">
-        <div class="title"><a href="wallpaper.html">Moss and fern macro, soft morning light</a><span class="res-tag">4000×3000</span></div>
+        <div class="title"><a href="wallpaper.html?slug=moss-and-fern-macro-soft-morning-light">Moss and fern macro, soft morning light</a><span class="res-tag">4000×3000</span></div>
         <div class="credit">by <a href="designer.html?u=fieldnotes">fieldnotes</a></div>
         <div class="stats">
           <span class="cat-tag">nature</span>
@@ -150,7 +154,7 @@
       </div>
       <div class="thumb" style="background:linear-gradient(135deg,#1a1a2e,#e94560);"></div>
       <div class="rowbody">
-        <div class="title"><a href="wallpaper.html">Isometric city at dusk, pixel art</a><span class="res-tag">1920×1080</span></div>
+        <div class="title"><a href="wallpaper.html?slug=isometric-city-at-dusk-pixel-art">Isometric city at dusk, pixel art</a><span class="res-tag">1920×1080</span></div>
         <div class="credit">by <a href="designer.html?u=8bit_hana">8bit_hana</a></div>
         <div class="stats">
           <span class="cat-tag">pixel art</span>
@@ -172,7 +176,7 @@
       </div>
       <div class="thumb" style="background:linear-gradient(135deg,#3a2b1a,#a67c52);"></div>
       <div class="rowbody">
-        <div class="title"><a href="wallpaper.html">Topographic contour lines, sand dune study</a><span class="res-tag">3440×1440</span></div>
+        <div class="title"><a href="wallpaper.html?slug=topographic-contour-lines-sand-dune-study">Topographic contour lines, sand dune study</a><span class="res-tag">3440×1440</span></div>
         <div class="credit">by <a href="designer.html?u=linework">linework</a></div>
         <div class="stats">
           <span class="cat-tag">abstract</span>
@@ -224,17 +228,21 @@
       <a href="category.html">categories</a>
       <a href="mobile.html">mobile wallpapers</a>
       <a href="favorites.html">favorites</a>
+      <a href="upload.html">upload</a>
     </div>
     <div class="fcol">
       <h4>community</h4>
       <a href="designer.html">designers</a>
       <a href="search.html">search</a>
+      <a href="community.html">community wallpapers</a>
     </div>
     <div class="fcol">
       <h4>about</h4>
       <a href="license.html">license &amp; usage</a>
+      <a href="faq.html">faq</a>
+      <a href="status.html">status</a>
       <a href="#">contact</a>
-      <a href="404.html">report a broken link</a>
+      <a href="javascript:void(0)" onclick="showReport()">report a broken link</a>
     </div>
   </div>
   <div class="fbottom">wllpppr — a hand-curated wallpaper library.<br>
@@ -242,11 +250,45 @@
       angry capybara mascot based on <a href="https://www.pinterest.com/pin/806425877067159136/" style="color:#a9a798; text-decoration:underline;">Pinterest</a> — if you're the creator and want it removed, <a href="contact.html" style="color:#a9a798; text-decoration:underline;">let us know</a></div>
 </footer>
 
-<script src="assets/api-key.js"></script>
-<script src="assets/unsplash.js"></script>
+<script src="assets/cloudinary.js"></script>
+<script src="assets/wallpaper-loader.js"></script>
+<div class="modal-overlay" id="report-modal" onclick="closeReport(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-head">report a broken link</div>
+    <div class="modal-body">
+      <p>If a download link isn't working, let us know which wallpaper and resolution so we can fix it.</p>
+      <label>wallpaper URL</label>
+      <input class="modal-input" id="report-url" readonly>
+      <label>what's broken?</label>
+      <select class="modal-input">
+        <option>Download link doesn't work</option>
+        <option>Wrong image / mismatch</option>
+        <option>Image won't load in preview</option>
+        <option>Other issue</option>
+      </select>
+      <label>notes (optional)</label>
+      <textarea class="modal-input" rows="3" placeholder="any additional details..."></textarea>
+      <button class="btn" onclick="submitReport()">submit report</button>
+      <button class="btn" style="float:right;" onclick="closeReport()">cancel</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
 function toggleTheme(){var e=document.documentElement;e.getAttribute('data-theme')==='dark'?(e.removeAttribute('data-theme'),localStorage.setItem('theme','light')):(e.setAttribute('data-theme','dark'),localStorage.setItem('theme','dark'));}
+function showReport(){document.getElementById('report-url').value=location.href;document.getElementById('report-modal').classList.add('active');}
+function closeReport(e){if(!e||!e.target.closest('.modal-box'))document.getElementById('report-modal').classList.remove('active');}
+function submitReport(){alert('Thanks for the report! We\'ll look into it.');closeReport();}
+(function(){
+  try{
+    var c=JSON.parse(localStorage.getItem('wllpppr_status'));
+    if(c&&c.results&&!c.results.every(function(v){return v;})&&c.time&&(Date.now()-c.time<6*60*60*1000)){
+      document.getElementById('status-banner').style.display='block';
+    }
+  }catch(e){}
+})();
 </script>
+<script src="assets/share.js"></script>
 </body>
 </html>

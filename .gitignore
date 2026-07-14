@@ -3,3 +3,9 @@ assets/api-key.js
 
 # Generated favicon sets
 assets/Favicon/
+
+.vercel
+
+# dev dependencies
+node_modules/
+scripts/

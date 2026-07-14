@@ -41,7 +41,7 @@
       <div class="vote"><div class="arrow up"></div><div class="count">4.1k</div><div class="arrow down"></div></div>
       <div class="thumb" style="background:linear-gradient(135deg,#0d1b2a,#1b3a5c);"></div>
       <div class="rowbody">
-        <div class="title"><a href="wallpaper.html">Tokyo rain, <mark style="background:#fff3b0;">neon</mark> reflections, blue hour</a><span class="res-tag">3840×2160</span></div>
+        <div class="title"><a href="wallpaper.html?slug=tokyo-rain-neon-reflections-blue-hour">Tokyo rain, <mark style="background:#fff3b0;">neon</mark> reflections, blue hour</a><span class="res-tag">3840×2160</span></div>
         <div class="credit">by <a href="designer.html?u=kaeru_night">kaeru_night</a></div>
         <div class="stats">
           <a href="category.html?c=cityscapes" class="cat-tag">cityscapes</a>
@@ -58,7 +58,7 @@
       <div class="vote"><div class="arrow up"></div><div class="count">2.9k</div><div class="arrow down"></div></div>
       <div class="thumb" style="background:linear-gradient(135deg,#6a4a8a,#c96ba0);"></div>
       <div class="rowbody">
-        <div class="title"><a href="wallpaper.html">Synthwave grid horizon, <mark style="background:#fff3b0;">neon</mark> sun</a><span class="res-tag">2560×1440</span></div>
+        <div class="title"><a href="wallpaper.html?slug=synthwave-grid-horizon-neon-sun">Synthwave grid horizon, <mark style="background:#fff3b0;">neon</mark> sun</a><span class="res-tag">2560×1440</span></div>
         <div class="credit">by <a href="designer.html?u=vhs_ghost">vhs_ghost</a></div>
         <div class="stats">
           <a href="category.html?c=synthwave" class="cat-tag">synthwave</a>
@@ -75,7 +75,7 @@
       <div class="vote"><div class="arrow up"></div><div class="count">1.6k</div><div class="arrow down"></div></div>
       <div class="thumb" style="background:linear-gradient(135deg,#2b2b2b,#e94560);"></div>
       <div class="rowbody">
-        <div class="title"><a href="wallpaper.html"><mark style="background:#fff3b0;">Neon</mark> vending machine glow, alleyway</a><span class="res-tag">2560×1440</span></div>
+        <div class="title"><a href="wallpaper.html?slug=neon-vending-machine-glow-alleyway"><mark style="background:#fff3b0;">Neon</mark> vending machine glow, alleyway</a><span class="res-tag">2560×1440</span></div>
         <div class="credit">by <a href="designer.html?u=kaeru_night">kaeru_night</a></div>
         <div class="stats">
           <a href="category.html?c=cityscapes" class="cat-tag">cityscapes</a>
@@ -119,17 +119,21 @@
       <a href="category.html">categories</a>
       <a href="mobile.html">mobile wallpapers</a>
       <a href="favorites.html">favorites</a>
+      <a href="upload.html">upload</a>
     </div>
     <div class="fcol">
       <h4>community</h4>
       <a href="designer.html">designers</a>
       <a href="search.html">search</a>
+      <a href="community.html">community wallpapers</a>
     </div>
     <div class="fcol">
       <h4>about</h4>
       <a href="license.html">license &amp; usage</a>
+      <a href="faq.html">faq</a>
+      <a href="status.html">status</a>
       <a href="#">contact</a>
-      <a href="404.html">report a broken link</a>
+      <a href="javascript:void(0)" onclick="showReport()">report a broken link</a>
     </div>
   </div>
   <div class="fbottom">wllpppr — a hand-curated wallpaper library.<br>
@@ -137,11 +141,37 @@
       angry capybara mascot based on <a href="https://www.pinterest.com/pin/806425877067159136/" style="color:#a9a798; text-decoration:underline;">Pinterest</a> — if you're the creator and want it removed, <a href="contact.html" style="color:#a9a798; text-decoration:underline;">let us know</a></div>
 </footer>
 
-<script src="assets/api-key.js"></script>
-<script src="assets/unsplash.js"></script>
+<script src="assets/cloudinary.js"></script>
+<script src="assets/wallpaper-loader.js"></script>
+<div class="modal-overlay" id="report-modal" onclick="closeReport(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-head">report a broken link</div>
+    <div class="modal-body">
+      <p>If a download link isn't working, let us know which wallpaper and resolution so we can fix it.</p>
+      <label>wallpaper URL</label>
+      <input class="modal-input" id="report-url" readonly>
+      <label>what's broken?</label>
+      <select class="modal-input">
+        <option>Download link doesn't work</option>
+        <option>Wrong image / mismatch</option>
+        <option>Image won't load in preview</option>
+        <option>Other issue</option>
+      </select>
+      <label>notes (optional)</label>
+      <textarea class="modal-input" rows="3" placeholder="any additional details..."></textarea>
+      <button class="btn" onclick="submitReport()">submit report</button>
+      <button class="btn" style="float:right;" onclick="closeReport()">cancel</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
 function toggleTheme(){var e=document.documentElement;e.getAttribute('data-theme')==='dark'?(e.removeAttribute('data-theme'),localStorage.setItem('theme','light')):(e.setAttribute('data-theme','dark'),localStorage.setItem('theme','dark'));}
+function showReport(){document.getElementById('report-url').value=location.href;document.getElementById('report-modal').classList.add('active');}
+function closeReport(e){if(!e||!e.target.closest('.modal-box'))document.getElementById('report-modal').classList.remove('active');}
+function submitReport(){alert('Thanks for the report! We\'ll look into it.');closeReport();}
 </script>
+<script src="assets/share.js"></script>
 </body>
 </html>

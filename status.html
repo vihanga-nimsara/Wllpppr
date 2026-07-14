@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>wllpppr status</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html">← back</a>
+  <span class="spacer"></span>
+  <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">☾</button>
+</div>
+
+<div class="header">
+  <a href="index.html" class="logo">wllpppr</a>
+  <div class="spacer"></div>
+  <form class="searchform" action="search.html" method="get">
+    <input class="searchbox" name="q" placeholder="search wallpapers">
+    <button class="search-go" type="submit">go</button>
+  </form>
+</div>
+
+<div class="wrap" style="justify-content:center;">
+  <div class="col-main" style="max-width:560px; flex:none;">
+
+    <div class="crumbs"><a href="index.html">popular</a> › status</div>
+
+    <div class="post" style="display:block;">
+      <div class="post-body" style="padding:20px;">
+
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px;">
+          <img src="assets/favicon.png" style="width:28px; height:28px; border-radius:4px;">
+          <div>
+            <h1 style="font-size:21px; margin:0;">wllpppr status</h1>
+            <div style="font-size:11px; color:#7a7869; margin-top:2px;" id="last-checked">checking...</div>
+          </div>
+        </div>
+
+        <div id="summary" style="margin:14px 0; padding:10px 14px; border-radius:4px; font-size:12px; font-weight:bold; display:none;"></div>
+
+        <div id="components"></div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fwrap">
+    <div class="fcol">
+      <h4>wllpppr</h4>
+      <a href="index.html">popular</a>
+      <a href="category.html">categories</a>
+      <a href="mobile.html">mobile wallpapers</a>
+      <a href="favorites.html">favorites</a>
+      <a href="upload.html">upload</a>
+    </div>
+    <div class="fcol">
+      <h4>community</h4>
+      <a href="designer.html">designers</a>
+      <a href="search.html">search</a>
+      <a href="community.html">community wallpapers</a>
+    </div>
+    <div class="fcol">
+      <h4>about</h4>
+      <a href="license.html">license &amp; usage</a>
+      <a href="faq.html">faq</a>
+      <a href="status.html">status</a>
+      <a href="contact.html">contact</a>
+      <a href="javascript:void(0)" onclick="showReport()">report a broken link</a>
+    </div>
+  </div>
+  <div class="fbottom">wllpppr — a hand-curated wallpaper library.<br>
+      built by <a href="#" style="color:#a9a798; text-decoration:underline;">Vihanga</a> · fueled by coffee, old Reddit nostalgia and one too many browser tabs · no cookies were harmed (we don't use any)<br>
+      angry capybara mascot based on <a href="https://www.pinterest.com/pin/806425877067159136/" style="color:#a9a798; text-decoration:underline;">Pinterest</a> — if you're the creator and want it removed, <a href="contact.html" style="color:#a9a798; text-decoration:underline;">let us know</a></div>
+</footer>
+
+<div class="modal-overlay" id="report-modal" onclick="closeReport(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-head">report a broken link</div>
+    <div class="modal-body">
+      <p>If a download link isn't working, let us know which wallpaper and resolution so we can fix it.</p>
+      <label>wallpaper URL</label>
+      <input class="modal-input" id="report-url" readonly>
+      <label>what's broken?</label>
+      <select class="modal-input">
+        <option>Download link doesn't work</option>
+        <option>Wrong image / mismatch</option>
+        <option>Image won't load in preview</option>
+        <option>Other issue</option>
+      </select>
+      <label>notes (optional)</label>
+      <textarea class="modal-input" rows="3" placeholder="any additional details..."></textarea>
+      <button class="btn" onclick="submitReport()">submit report</button>
+      <button class="btn" style="float:right;" onclick="closeReport()">cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/cloudinary.js"></script>
+<script>
+(function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
+function toggleTheme(){var e=document.documentElement;e.getAttribute('data-theme')==='dark'?(e.removeAttribute('data-theme'),localStorage.setItem('theme','light')):(e.setAttribute('data-theme','dark'),localStorage.setItem('theme','dark'));}
+function showReport(){document.getElementById('report-url').value=location.href;document.getElementById('report-modal').classList.add('active');}
+function closeReport(e){if(!e||!e.target.closest('.modal-box'))document.getElementById('report-modal').classList.remove('active');}
+function submitReport(){alert('Thanks for the report! We\'ll look into it.');closeReport();}
+
+(function(){
+  var CACHE_KEY = 'wllpppr_status';
+  var CACHE_TTL = 6 * 60 * 60 * 1000; // 6 hours
+
+  function icon(ok){
+    var c = ok === null ? '#cccabc' : ok ? '#2d6a4f' : '#c0472a';
+    return '<svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="'+c+'"/></svg>';
+  }
+
+  var components = [
+    {
+      name: 'Website',
+      desc: 'Static pages, navigation, search, and browsing',
+      check: function(cb){
+        fetch(location.href, {method:'HEAD', cache:'no-cache'}).then(function(r){ cb(r.ok); }).catch(function(){ cb(false); });
+      }
+    },
+    {
+      name: 'Cloudinary CDN',
+      desc: 'Image hosting, thumbnails, previews, and downloads',
+      check: function(cb){
+        var img = new Image();
+        var t = setTimeout(function(){ img.src = ''; cb(false); }, 8000);
+        img.onload = function(){ clearTimeout(t); cb(true); };
+        img.onerror = function(){ clearTimeout(t); cb(false); };
+        img.src = window.CLOUDINARY.thumb('wallpapers/tokyo-rain-neon-reflections-blue-hour') + '?_=' + Date.now();
+      }
+    },
+    {
+      name: 'Uploads',
+      desc: 'Community upload widget and gallery',
+      check: function(cb){
+        var s = document.createElement('script');
+        var t = setTimeout(function(){ s.onload = s.onerror = null; cb(false); }, 8000);
+        s.onload = function(){ clearTimeout(t); cb(true); };
+        s.onerror = function(){ clearTimeout(t); cb(false); };
+        s.src = 'https://widget.cloudinary.com/v2.0/global/all.js?_=' + Date.now();
+        document.head.appendChild(s);
+      }
+    }
+  ];
+
+  function saveResults(results){
+    try{ localStorage.setItem(CACHE_KEY, JSON.stringify({results:results, time:Date.now()})); }catch(e){}
+  }
+
+  function renderResults(results){
+    var allOk = results.every(function(v){ return v; });
+    summary.style.display = 'block';
+    if(allOk){
+      summary.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" style="margin-right:6px;vertical-align:-2px;"><circle cx="8" cy="8" r="7" fill="#2d6a4f"/></svg> All systems operational';
+      summary.style.cssText = 'margin:14px 0;padding:10px 14px;border-radius:4px;font-size:12px;font-weight:bold;background:#d4edda;color:#2d6a4f;border:1px solid #c3e6cb;';
+    } else {
+      summary.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16" style="margin-right:6px;vertical-align:-2px;"><circle cx="8" cy="8" r="7" fill="#c0472a"/></svg> Some services are experiencing issues';
+      summary.style.cssText = 'margin:14px 0;padding:10px 14px;border-radius:4px;font-size:12px;font-weight:bold;background:#f8d7da;color:#c0472a;border:1px solid #f5c6cb;';
+    }
+    for(var i=0;i<components.length;i++){
+      var r = rows[i];
+      var badge = r.querySelector('.status-badge');
+      var ico = r.querySelector('.status-icon');
+      if(results[i]){
+        badge.textContent = 'operational';
+        badge.style.cssText = 'font-size:10px;padding:3px 10px;border-radius:3px;font-weight:bold;background:#d4edda;color:#2d6a4f;';
+      } else {
+        badge.textContent = 'down';
+        badge.style.cssText = 'font-size:10px;padding:3px 10px;border-radius:3px;font-weight:bold;background:#f8d7da;color:#c0472a;';
+      }
+      ico.innerHTML = icon(results[i]);
+    }
+  }
+
+  var container = document.getElementById('components');
+  var summary = document.getElementById('summary');
+  var rows = [];
+
+  // Build rows
+  for(var i=0;i<components.length;i++){
+    var d = document.createElement('div');
+    d.className = 'status-row';
+    d.style.cssText = 'display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #ebe9dc;';
+    d.innerHTML =
+      '<span class="status-icon">'+icon(null)+'</span>' +
+      '<div style="flex:1;"><div class="status-label" style="font-size:12px; font-weight:bold; color:#333;">'+components[i].name+'</div><div style="font-size:11px; color:#7a7869;">'+components[i].desc+'</div></div>' +
+      '<span class="status-badge checking" style="font-size:10px;padding:3px 10px;border-radius:3px;font-weight:bold;background:#f2f0e6;color:#7a7869;">checking...</span>';
+    container.appendChild(d);
+    rows[i] = d;
+  }
+
+  // Check cache first
+  var cached = null;
+  try{ cached = JSON.parse(localStorage.getItem(CACHE_KEY)); }catch(e){}
+  if(cached && cached.results && cached.time && (Date.now() - cached.time < CACHE_TTL)){
+    renderResults(cached.results);
+    document.getElementById('last-checked').textContent = 'last checked: ' + (cached.time ? new Date(cached.time).toLocaleString() : 'cached');
+    return;
+  }
+
+  document.getElementById('last-checked').textContent = 'last checked: just now';
+
+  var results = [];
+  var done = 0;
+  for(var j=0;j<components.length;j++){ results[j] = null; }
+
+  for(var k=0;k<components.length;k++){
+    (function(idx){
+      components[idx].check(function(ok){
+        results[idx] = ok;
+        done++;
+        var r = rows[idx];
+        var badge = r.querySelector('.status-badge');
+        var ico = r.querySelector('.status-icon');
+        if(ok){
+          badge.textContent = 'operational';
+          badge.style.cssText = 'font-size:10px;padding:3px 10px;border-radius:3px;font-weight:bold;background:#d4edda;color:#2d6a4f;';
+        } else {
+          badge.textContent = 'down';
+          badge.style.cssText = 'font-size:10px;padding:3px 10px;border-radius:3px;font-weight:bold;background:#f8d7da;color:#c0472a;';
+        }
+        ico.innerHTML = icon(ok);
+        if(done === components.length){
+          renderResults(results);
+          saveResults(results);
+        }
+      });
+    })(k);
+  }
+})();
+</script>
+<script src="assets/share.js"></script>
+</body>
+</html>

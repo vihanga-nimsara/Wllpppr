@@ -2,11 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>page not found · wllpppr</title>
+<title>upload wallpaper · wllpppr</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+
+<div class="topbar">
+  <a href="index.html">← back</a>
+  <span class="spacer"></span>
+  <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">☾</button>
+</div>
 
 <div class="header">
   <a href="index.html" class="logo">wllpppr</a>
@@ -15,16 +21,31 @@
     <input class="searchbox" name="q" placeholder="search wallpapers">
     <button class="search-go" type="submit">go</button>
   </form>
-  <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">☾</button>
 </div>
 
 <div class="wrap" style="justify-content:center;">
-  <div class="col-main" style="max-width:520px; flex:none;">
-    <div class="notfound">
-      <div class="code">404</div>
-      <h2>this wallpaper wandered off</h2>
-      <p>The page you're looking for doesn't exist, or the link is broken.</p>
-      <a href="index.html" class="follow-btn" style="display:inline-block; width:auto; padding:8px 18px;">back to popular</a>
+  <div class="col-main" style="max-width:560px; flex:none;">
+    <div class="crumbs"><a href="index.html">popular</a> › upload</div>
+
+    <div class="post" style="flex-direction:column; padding:24px;">
+      <h1 style="font-size:22px; margin-bottom:4px;">upload a wallpaper</h1>
+      <p style="color:#7a7869; font-size:12px; margin:0 0 18px;">Share your work with the community. High-res, no watermarks, original work only.</p>
+
+      <div style="border:2px dashed #cccabc; border-radius:6px; padding:36px; text-align:center; background:#fbfbf3;" id="upload-status">
+        <div style="font-size:36px; margin-bottom:10px; opacity:.5;">☁</div>
+        <p style="color:#7a7869; font-size:12px; margin:0 0 14px;">Click below to choose a file. JPEG or PNG, min 1920px on the longest side.</p>
+        <button class="follow-btn" id="upload-btn" style="display:inline-block; width:auto; padding:8px 20px; font-size:13px; cursor:pointer;">choose file</button>
+      </div>
+
+      <div style="margin-top:18px; font-size:11px; color:#7a7869; line-height:1.6;">
+        <b style="color:#444;">guidelines</b><br>
+        · Original work only — no AI generations, no reposts<br>
+        · Minimum resolution: 1920×1080 (or equivalent)<br>
+        · No watermarks, text overlays, or signatures in the image area<br>
+        · Appropriate for all ages<br>
+        · By uploading, you license your work under <b>CC BY-NC 4.0</b> and grant wllpppr a non-exclusive right to display, resize, and distribute it through the platform<br>
+        · You retain full copyright and may request takedown at any time<br>
+      </div>
     </div>
   </div>
 </div>
@@ -59,8 +80,6 @@
       angry capybara mascot based on <a href="https://www.pinterest.com/pin/806425877067159136/" style="color:#a9a798; text-decoration:underline;">Pinterest</a> — if you're the creator and want it removed, <a href="contact.html" style="color:#a9a798; text-decoration:underline;">let us know</a></div>
 </footer>
 
-<script src="assets/cloudinary.js"></script>
-<script src="assets/wallpaper-loader.js"></script>
 <div class="modal-overlay" id="report-modal" onclick="closeReport(event)">
   <div class="modal-box" onclick="event.stopPropagation()">
     <div class="modal-head">report a broken link</div>
@@ -83,6 +102,9 @@
   </div>
 </div>
 
+<script src="assets/cloudinary.js"></script>
+<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+<script src="assets/upload.js"></script>
 <script>
 (function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
 function toggleTheme(){var e=document.documentElement;e.getAttribute('data-theme')==='dark'?(e.removeAttribute('data-theme'),localStorage.setItem('theme','light')):(e.setAttribute('data-theme','dark'),localStorage.setItem('theme','dark'));}
@@ -90,6 +112,5 @@ function showReport(){document.getElementById('report-url').value=location.href;
 function closeReport(e){if(!e||!e.target.closest('.modal-box'))document.getElementById('report-modal').classList.remove('active');}
 function submitReport(){alert('Thanks for the report! We\'ll look into it.');closeReport();}
 </script>
-<script src="assets/share.js"></script>
 </body>
 </html>

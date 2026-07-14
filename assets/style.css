@@ -601,3 +601,62 @@ h1{font-size:19px; margin:0; font-weight:bold; color:#1a1a1a;}
 [data-theme="dark"] .prose{color:#bbb;}
 [data-theme="dark"] .prose h2{color:#ddd;}
 
+/* report modal */
+.modal-overlay{
+  display:none;
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,.45);
+  z-index:100;
+  justify-content:center;
+  align-items:center;
+}
+.modal-overlay.active{display:flex;}
+.modal-box{
+  background:#fff;
+  border-radius:6px;
+  max-width:440px;
+  width:90%;
+  box-shadow:0 8px 30px rgba(0,0,0,.2);
+  overflow:hidden;
+}
+.modal-head{
+  background:var(--tan);
+  padding:10px 14px;
+  font-size:13px;
+  font-weight:bold;
+  border-bottom:1px solid var(--border);
+}
+.modal-body{padding:14px;}
+.modal-body p{font-size:11px;color:#555;margin:0 0 10px;}
+.modal-input{
+  display:block;
+  width:100%;
+  margin-bottom:8px;
+  padding:6px 8px;
+  border:1px solid var(--border);
+  border-radius:3px;
+  font-family:inherit;
+  font-size:11px;
+}
+.modal-input:focus{outline:none;border-color:#8bb0d8;}
+.modal-body label{font-size:10px;color:var(--meta);display:block;margin-bottom:2px;}
+.modal-body .btn{margin-top:4px;}
+[data-theme="dark"] .modal-overlay{background:rgba(0,0,0,.65);}
+[data-theme="dark"] .modal-box{background:#1e1e20;}
+[data-theme="dark"] .modal-head{color:#ccc;}
+[data-theme="dark"] .modal-body p{color:#999;}
+[data-theme="dark"] .modal-input{background:#161618;color:#ccc;border-color:var(--border);}
+
+/* upload success */
+.upload-done{text-align:center;}
+.upload-thumb{width:120px;height:90px;border-radius:4px;background-size:cover;background-position:center;margin:0 auto 10px;border:1px solid var(--border);}
+.upload-done p{font-size:12px;color:#555;margin:0;}
+[data-theme="dark"] .upload-done p{color:#999;}
+
+/* status page */
+.status-row{border-color:#ebe9dc;}
+[data-theme="dark"] .status-row{border-color:#2a2a2c !important;}
+[data-theme="dark"] .status-row .status-label{color:#ccc !important;}
+[data-theme="dark"] .status-badge.checking{background:#2a2a2c !important;color:#999 !important;}
+
