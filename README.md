@@ -1,6 +1,6 @@
 # wllpppr
 
-A hand-curated wallpaper library. No uploads, no clutter — just wallpapers worth staring at for eight hours a day.
+A hand-curated wallpaper library with community uploads, upvotes, favorites, comments, and broken-link reports — powered by Cloudinary and Supabase.
 
 Built with plain HTML, CSS, and JavaScript. No frameworks, no build step.
 
@@ -11,10 +11,14 @@ Built with plain HTML, CSS, and JavaScript. No frameworks, no build step.
 - **Dark mode** toggle with system preference detection and localStorage persistence
 - **Live images** served from [Cloudinary](https://cloudinary.com/) — thumbnails, previews, and downloads with automatic format/quality optimisation
 - **Community uploads** via the Cloudinary Upload Widget — users can submit their own wallpapers (CC BY-NC 4.0)
-- **Favorites** saved to localStorage
-- **Status page** with real-time component health checks (cached every 6 hours)
+- **Upvotes & downvotes** — click ▲/▼ on any wallpaper, persisted in Supabase
+- **Favorites** — star wallpapers, saved to Supabase, viewable on `/favorites`
+- **Comments** — leave feedback on any wallpaper, stored in Supabase
+- **Download tracking** — every download counted via Supabase
+- **Reports** — users can report broken links, viewable at `/reports` with timestamps
+- **Status page** with real-time component health checks (including Supabase), cached every 6 hours
 - **Responsive layout** with sidebar cards for stats, tags, and designer info
-- **No cookies, trackers, or analytics**
+- **No cookies, trackers, or analytics** — session-based anonymous user tracking via localStorage**
 
 ## Pages
 
@@ -30,7 +34,8 @@ Built with plain HTML, CSS, and JavaScript. No frameworks, no build step.
 | `upload.html` | Community upload page |
 | `community.html` | Community wallpaper gallery |
 | `faq.html` | Frequently asked questions |
-| `status.html` | Component status (Website, Cloudinary CDN, Uploads) |
+| `status.html` | Component status (Website, Cloudinary CDN, Uploads, Supabase) |
+| `reports.html` | Submitted broken-link reports with timestamps |
 | `license.html` | License & usage (dual: personal non-commercial + CC BY-NC 4.0) |
 | `developer.html` | Developer / about page |
 | `404.html` | Not found page |
@@ -57,11 +62,13 @@ npx vercel --prod
 |------|-------------|
 | `assets/style.css` | Stylesheet (light + dark mode) |
 | `assets/cloudinary.js` | Cloudinary config and URL helpers |
+| `assets/supabase.js` | Supabase client — votes, favorites, downloads, comments, reports |
 | `assets/data.js` | 17 curated wallpapers + 8 designer profiles |
 | `assets/wallpaper-loader.js` | Thumbnail/preview loading from Cloudinary |
 | `assets/upload.js` | Cloudinary Upload Widget integration |
 | `assets/share.js` | Web Share API / clipboard copy |
 | `assets/favicon.png` | Site favicon (angry capybara) |
+| `setup.sql` | SQL to create Supabase tables (upvotes, downloads, favorites, comments, reports) |
 
 ## License
 
