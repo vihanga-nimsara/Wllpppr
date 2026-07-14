@@ -499,6 +499,12 @@ h1{font-size:19px; margin:0; font-weight:bold; color:#1a1a1a;}
 .rel-title{font-size:11px; line-height:1.3;}
 .rel-meta{color:var(--meta); font-size:10px; margin-top:2px;}
 
+/* prose content (license, about, etc) */
+.prose{color:#555;}
+.prose h2{color:#333;}
+.prose p{margin:0 0 10px 0;}
+.prose p:last-child{margin-bottom:0;}
+
 /* dark mode toggle */
 .theme-btn{
   background:none;
@@ -597,4 +603,6 @@ h1{font-size:19px; margin:0; font-weight:bold; color:#1a1a1a;}
 [data-theme="dark"] .designer-name{color:#ccc;}
 [data-theme="dark"] .designer-name{color:#ccc;}
 [data-theme="dark"] .profile-head a.follow-btn{color:var(--blue);}
+[data-theme="dark"] .prose{color:#bbb;}
+[data-theme="dark"] .prose h2{color:#ddd;}
 

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>license & usage · wllpppr</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html">← back to popular</a>
+  <span class="spacer"></span>
+  <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode">☾</button>
+</div>
+
+<div class="header">
+  <a href="index.html" class="logo"><span class="mark"></span>wllpppr</a>
+  <div class="spacer"></div>
+  <form class="searchform" action="search.html" method="get">
+    <input class="searchbox" name="q" placeholder="search wallpapers">
+    <button class="search-go" type="submit">go</button>
+  </form>
+</div>
+
+<div class="wrap" style="justify-content:center;">
+  <div class="col-main" style="max-width:680px; flex:none;">
+
+    <div class="crumbs"><a href="index.html">popular</a> › license & usage</div>
+
+    <div class="post" style="display:block;">
+      <div class="post-body" style="padding:20px;">
+
+        <h1 style="font-size:21px; margin-bottom:16px;">License & Usage</h1>
+
+        <div class="stat-line" style="border:none; padding:0 0 6px 0;"><span>last updated</span><b>April 2026</b></div>
+
+        <div class="prose" style="font-size:12px; line-height:1.7; margin-top:16px;">
+          <p style="margin:0 0 12px 0;">All wallpapers featured on wllpppr are curated from publicly available sources. Each wallpaper is hosted by its original creator and linked from their preferred distribution channel.</p>
+
+          <h2 style="font-size:14px; margin:20px 0 8px 0;">General Use</h2>
+          <p style="margin:0 0 10px 0;">Unless otherwise noted by the individual creator, wallpapers on this site are free for <b>personal, non-commercial use</b>. This includes desktop backgrounds, lock screens, phone wallpapers, and personal device theming.</p>
+          <p style="margin:0 0 10px 0;">Redistribution, resale, or use in commercial products requires explicit permission from the original creator. wllpppr is an index and does not grant or transfer any copyright.</p>
+
+          <h2 style="font-size:14px; margin:20px 0 8px 0;">Attribution</h2>
+          <p style="margin:0 0 10px 0;">Some creators request attribution when their work is shared or featured. Check each wallpaper's designer page for their preferred attribution method. When in doubt, credit the creator by name with a link to their profile.</p>
+          <p style="margin:0 0 10px 0;">wllpppr always links back to the original creator and their source — we encourage you to do the same when sharing wallpapers elsewhere.</p>
+
+          <h2 style="font-size:14px; margin:20px 0 8px 0;">Downloads</h2>
+          <p style="margin:0 0 10px 0;">All download buttons on wllpppr link directly to the file hosted by the creator or their chosen platform. We do not rehost or modify wallpaper files. Download counts are estimates provided for popularity ranking.</p>
+
+          <h2 style="font-size:14px; margin:20px 0 8px 0;">Copyright & Takedowns</h2>
+          <p style="margin:0 0 10px 0;">If you are a creator and find your work indexed here and wish to have it removed, please <a href="contact.html">get in touch</a>. We aim to respond within 48 hours. Please include the wallpaper URL and proof of original authorship.</p>
+          <p style="margin:0 0 10px 0;">wllpppr respects creator rights and will honor takedown requests promptly. This is a passion project by a solo curator — not a commercial operation.</p>
+
+          <h2 style="font-size:14px; margin:20px 0 8px 0;">Site Usage</h2>
+          <p style="margin:0 0 10px 0;">wllpppr does not use cookies, trackers, or analytics. We do not collect personal data. Favorites are stored locally in your browser and are never transmitted to any server.</p>
+          <p style="margin:0 0 10px 0;">The site is provided as-is. No guarantees are made regarding uptime, availability, or the continued presence of any specific wallpaper.</p>
+
+          <h2 style="font-size:14px; margin:20px 0 8px 0;">Questions</h2>
+          <p style="margin:0 0 10px 0;">If you have a question about licensing, usage, or want to suggest a wallpaper for inclusion, use the <a href="contact.html">contact page</a>.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="fwrap">
+    <div class="fcol">
+      <h4>wllpppr</h4>
+      <a href="index.html">popular</a>
+      <a href="category.html">categories</a>
+      <a href="mobile.html">mobile wallpapers</a>
+      <a href="favorites.html">favorites</a>
+    </div>
+    <div class="fcol">
+      <h4>community</h4>
+      <a href="designer.html">designers</a>
+      <a href="search.html">search</a>
+    </div>
+    <div class="fcol">
+      <h4>about</h4>
+      <a href="license.html">license &amp; usage</a>
+      <a href="contact.html">contact</a>
+      <a href="404.html">report a broken link</a>
+    </div>
+  </div>
+  <div class="fbottom">wllpppr — a hand-curated wallpaper library.<br>
+      built by <a href="#" style="color:#a9a798; text-decoration:underline;">Vihanga</a> · fueled by coffee, old Reddit nostalgia and one too many browser tabs · no cookies were harmed (we don't use any)</div>
+</footer>
+
+<script src="assets/api-key.js"></script>
+<script src="assets/unsplash.js"></script>
+<script>
+(function(){var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches)){document.documentElement.setAttribute('data-theme','dark');}})();
+function toggleTheme(){var e=document.documentElement;e.getAttribute('data-theme')==='dark'?(e.removeAttribute('data-theme'),localStorage.setItem('theme','light')):(e.setAttribute('data-theme','dark'),localStorage.setItem('theme','dark'));}
+</script>
+</body>
+</html>
